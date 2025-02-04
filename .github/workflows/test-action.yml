@@ -1,24 +1,30 @@
+# Flutterのテストを自動実行するワークフロー
 name: test-action
 
 on: [ push ]
 
 jobs:
   test:
+    # テストジョブの名前を設定
     name: Run Flutter Tests
     runs-on: ubuntu-latest
 
     steps:
+      # リポジトリのチェックアウト
       - name: Check out repository
         uses: actions/checkout@v3
 
+      # Flutterの環境をセットアップ
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.27.3'
 
+      # 依存関係のインストール
       - name: Install dependencies
         run: flutter pub get
 
+      # テストの実行とカバレッジの取得
       - name: Run tests
         run: flutter test --coverage
         env:
