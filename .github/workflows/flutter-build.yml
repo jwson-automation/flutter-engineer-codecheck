@@ -5,7 +5,7 @@ on: [push]
 
 jobs:
   build:
-    name: Run Flutter Tests
+    name: Run Build Tests
     runs-on: ubuntu-latest
 
     steps:
