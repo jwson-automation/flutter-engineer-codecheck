@@ -1,11 +1,10 @@
-# Flutterのテストを自動実行するワークフロー
-name: test-action
+# Flutterテストを自動実行するワークフロー
+name: flutter-test
 
 on: [ push ]
 
 jobs:
   test:
-    # テストジョブの名前を設定
     name: Run Flutter Tests
     runs-on: ubuntu-latest
 

@@ -1,0 +1,35 @@
+# Flutterビルドを自動実行するワークフロー
+name: flutter-build
+
+on: [push]
+
+jobs:
+  build:
+    name: Run Flutter Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # ソースコードのチェックアウト
+      - uses: actions/checkout@v4
+
+      # Flutter SDKのセットアップ
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.3'
+          channel: 'stable'
+
+      # プロジェクトの依存関係をインストール
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Android ビルド用のGradleセットアップ
+      - name: Setup Gradle
+        run: |
+          flutter create --platforms=android .
+          cd android
+          ./gradlew wrapper
+
+      # Android APKのビルド
+      - name: Build Android
+        run: flutter build apk
