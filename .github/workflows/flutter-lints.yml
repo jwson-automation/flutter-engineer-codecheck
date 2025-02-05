@@ -1,0 +1,29 @@
+# GitHub Actionsワークフローの名前を指定します。
+name: yumemi-lints
+
+on: [ push ]
+
+jobs:
+  yumemi-lint:
+    name: Check Yumemi Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリのチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Flutterの環境をセットアップ
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.3'
+
+      # 依存関係のインストール
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Flutterコード解析を実行します。
+      # --no-fatal-infosオプションは情報メッセージをエラーとして扱わないようにします。
+      - name: Run Flutter Lint
+        run: flutter analyze --no-fatal-infos
