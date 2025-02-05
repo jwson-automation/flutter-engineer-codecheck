@@ -22,6 +22,12 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      # .env ファイル生成
+      - name: Create .env file
+        run: |
+          touch .env
+          echo "GITHUB_TOKEN=your_github_token_here" >> .env
+
       # Android ビルド用のGradleセットアップ
       - name: Setup Gradle
         run: |
