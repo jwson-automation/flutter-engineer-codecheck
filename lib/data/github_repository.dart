@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
 
+// TODO : テストコード作成
 // TODO : Paging 処理を実装する
 // TODO : エラーハンドリングを実装する ( inheritanceで実装しようか )
 
@@ -10,7 +12,9 @@ class GitHubRepository {
   final String baseUrl = 'https://api.github.com';
 
   /// GitHub APIのためのPersonal Access Token
-  final String token = '';
+  /// FlutterConfigを使用して環境変数から取得
+  /// .envファイルのGITHUB_TOKEN情報を取得
+  final String? token = FlutterConfig.get('GITHUB_TOKEN');
 
   /// 指定されたクエリでリポジトリを検索します
   Future<Map<String, dynamic>> searchRepositories({
