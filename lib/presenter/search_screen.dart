@@ -17,7 +17,8 @@ class _SearchScreenState extends State<SearchScreen> {
   List<dynamic> _searchResults = [
     {
       'full_name': 'flutter/flutter',
-      'description': 'Flutter makes it easy and fast to build beautiful apps for mobile and beyond',
+      'description':
+          'Flutter makes it easy and fast to build beautiful apps for mobile and beyond',
       'stargazers_count': 158432,
       'forks_count': 25643,
       'language': 'Dart',
@@ -31,7 +32,8 @@ class _SearchScreenState extends State<SearchScreen> {
     },
     {
       'full_name': 'facebook/react',
-      'description': 'A declarative, efficient, and flexible JavaScript library for building user interfaces.',
+      'description':
+          'A declarative, efficient, and flexible JavaScript library for building user interfaces.',
       'stargazers_count': 203456,
       'forks_count': 42789,
       'language': 'JavaScript',

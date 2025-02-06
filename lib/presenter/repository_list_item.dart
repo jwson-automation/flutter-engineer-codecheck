@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 /// GitHub リポジトリの検索結果を表示するリストアイテムウィジェット
 class RepositoryListItem extends StatelessWidget {
   const RepositoryListItem({
-    required this.repository, super.key,
+    required this.repository,
+    super.key,
     this.onTap,
   });
+
   /// リポジトリ情報を含むMap
   final Map<String, dynamic> repository;
 
