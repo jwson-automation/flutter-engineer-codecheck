@@ -34,6 +34,13 @@ subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin('com.android.library') || project.plugins.hasPlugin('com.android.application')) {
+            project.android.compileSdkVersion = 34
+        }
+    }
+}
+subprojects {
     project.evaluationDependsOn(":app")
 }
 

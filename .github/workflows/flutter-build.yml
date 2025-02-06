@@ -28,12 +28,6 @@ jobs:
           touch .env
           echo "GITHUB_TOKEN=your_github_token_here" >> .env
 
-      # Android SDK Platform 33 インストール
-      - name: Install Android SDK Platform 33
-        run: |
-          sdkmanager "platforms;android-33"
-          sdkmanager "build-tools;33.0.0"
-
       # Android ビルド用のGradleセットアップ
       - name: Setup Gradle
         run: |
