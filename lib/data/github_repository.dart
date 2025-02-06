@@ -68,7 +68,7 @@ class GitHubRepository {
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final List<dynamic> items = data['items'] as List<dynamic>;
-      
+
       return items.map((item) => GitHubRepositoryModel.fromJson(item)).toList();
     } else {
       // ステータスコードが200でない場合、例外をスロー
