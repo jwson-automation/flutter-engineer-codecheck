@@ -23,7 +23,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Future<void> _searchRepositories() async {
-    if (_searchTextController.text.isEmpty) return;
+    if (_searchTextController.text.trim().isEmpty) return;
 
     setState(() {
       _isLoading = true;
@@ -54,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('GitHub Repository 검색'),
+          title: const Text('GitHub Repository 検索'),
         ),
         body: Column(
           children: [
@@ -76,6 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
                 onSubmitted: (_) => _searchRepositories(),
+                onChanged: (_) => setState(() {}),
               ),
             ),
             Expanded(

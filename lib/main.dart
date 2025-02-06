@@ -10,7 +10,6 @@ void main() async {
   runApp(const RepositorySearchApp());
 }
 
-/// GitHub 레포지토리 검색 앱
 /// GitHub リポジトリ検索アプリ
 class RepositorySearchApp extends StatelessWidget {
   const RepositorySearchApp({super.key});
