@@ -25,6 +25,7 @@ class GitHubRepository {
     int perPage = 30, // 1ページあたりに表示するリポジトリの数（デフォルト: 30）
     int page = 1, // 取得するページ番号（デフォルト: 1）
   }) async {
+    print("token: $token");
     final queryParams = {
       'q': searchText, // 検索するテキスト
       'per_page': perPage.toString(), // 1ページに表示するリポジトリ数
@@ -59,8 +60,8 @@ class GitHubRepository {
     final response = await http.get(
       uri,
       headers: {
-        'Authorization': 'Bearer $token', // Personal Access Tokenをヘッダーに設定
         'Accept': 'application/vnd.github.v3+json', // GitHub APIのバージョンを指定
+        if (token != null) 'Authorization': 'token $token',
       },
     );
 

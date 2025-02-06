@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/data/github_repository.dart';
+import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
 import 'package:flutter_engineer_codecheck/presenter/repository_list_item.dart';
 
 /// GitHub Repository 検索画面
@@ -12,33 +14,9 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   // テキスト入力を管理するためのコントローラー
   final TextEditingController _searchTextController = TextEditingController();
+  final GitHubRepository _repository = GitHubRepository();
   bool _isLoading = false;
-  // 仮の検索結果
-  List<dynamic> _searchResults = [
-    {
-      'full_name': 'flutter/flutter',
-      'description':
-          'Flutter makes it easy and fast to build beautiful apps for mobile and beyond',
-      'stargazers_count': 158432,
-      'forks_count': 25643,
-      'language': 'Dart',
-    },
-    {
-      'full_name': 'microsoft/vscode',
-      'description': 'Visual Studio Code',
-      'stargazers_count': 154321,
-      'forks_count': 28765,
-      'language': 'TypeScript',
-    },
-    {
-      'full_name': 'facebook/react',
-      'description':
-          'A declarative, efficient, and flexible JavaScript library for building user interfaces.',
-      'stargazers_count': 203456,
-      'forks_count': 42789,
-      'language': 'JavaScript',
-    }
-  ];
+  List<GitHubRepositoryModel> _searchResults = [];
   String? _error;
 
   @override
@@ -57,8 +35,13 @@ class _SearchScreenState extends State<SearchScreen> {
     });
 
     try {
-      // TODO: GitHub API 呼び出しの実装
+      final results = await _repository.searchRepositories(
+        searchText: _searchTextController.text.trim(),
+        sort: 'stars',
+        order: 'desc',
+      );
       setState(() {
+        _searchResults = results;
         _isLoading = false;
       });
     } catch (e) {

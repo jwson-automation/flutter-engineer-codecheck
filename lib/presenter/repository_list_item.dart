@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
 
 /// GitHub リポジトリの検索結果を表示するリストアイテムウィジェット
 class RepositoryListItem extends StatelessWidget {
@@ -8,8 +9,8 @@ class RepositoryListItem extends StatelessWidget {
     this.onTap,
   });
 
-  /// リポジトリ情報を含むMap
-  final Map<String, dynamic> repository;
+  /// リポジトリ情報
+  final GitHubRepositoryModel repository;
 
   final VoidCallback? onTap;
 
@@ -31,7 +32,7 @@ class RepositoryListItem extends StatelessWidget {
                   // リポジトリ名
                   Expanded(
                     child: Text(
-                      repository['full_name'] ?? '',
+                      repository.fullName,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -42,10 +43,10 @@ class RepositoryListItem extends StatelessWidget {
               ),
 
               // リポジトリの説明がある場合は表示
-              if (repository['description'] != null) ...[
+              if (repository.description != null) ...[
                 const SizedBox(height: 8),
                 Text(
-                  repository['description'],
+                  repository.description!,
                   style: const TextStyle(fontSize: 14),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -64,7 +65,7 @@ class RepositoryListItem extends StatelessWidget {
                   children: [
                     const Icon(Icons.star_border, size: 16),
                     const SizedBox(width: 4),
-                    Text('${repository['stargazers_count'] ?? 0}'),
+                    Text('${repository.stargazersCount}'),
                   ],
                 ),
                 const SizedBox(width: 16),
@@ -74,18 +75,18 @@ class RepositoryListItem extends StatelessWidget {
                   children: [
                     const Icon(Icons.fork_right, size: 16),
                     const SizedBox(width: 4),
-                    Text('${repository['forks_count'] ?? 0}'),
+                    Text('${repository.forksCount}'),
                   ],
                 ),
 
                 // 言語
                 const SizedBox(width: 16),
-                if (repository['language'] != null)
+                if (repository.language != null)
                   Row(
                     children: [
                       const Icon(Icons.code, size: 16),
                       const SizedBox(width: 4),
-                      Text(repository['language']),
+                      Text(repository.language!),
                     ],
                   ),
               ],

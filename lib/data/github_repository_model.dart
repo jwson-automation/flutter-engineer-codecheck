@@ -6,6 +6,7 @@ class GitHubRepositoryModel {
   GitHubRepositoryModel({
     required this.fullName,
     required this.ownerAvatarUrl,
+    this.description,
     required this.language,
     required this.stargazersCount,
     required this.watchersCount,
@@ -18,6 +19,9 @@ class GitHubRepositoryModel {
 
   /// オーナーのアバターURL
   final String ownerAvatarUrl;
+
+  /// リポジトリの説明
+  final String? description;
 
   /// プロジェクトの主要言語
   final String? language;
@@ -39,6 +43,7 @@ class GitHubRepositoryModel {
       GitHubRepositoryModel(
         fullName: json['full_name'] ?? '',
         ownerAvatarUrl: json.validateUrl(json['owner']?['avatar_url']),
+        description: json['description'],
         language: json['language'],
         stargazersCount:
             json.parseCount(json['stargazers_count'], 'stargazers_count'),
@@ -53,6 +58,7 @@ class GitHubRepositoryModel {
   Map<String, dynamic> toJson() => {
         'full_name': fullName,
         'owner': {'avatar_url': ownerAvatarUrl},
+        'description': description,
         'language': language,
         'stargazers_count': stargazersCount,
         'watchers_count': watchersCount,
