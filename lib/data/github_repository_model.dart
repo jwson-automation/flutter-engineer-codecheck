@@ -1,3 +1,5 @@
+import 'package:flutter_engineer_codecheck/shared/json_validation_extension.dart';
+
 /// GitHub リポジトリのモデル
 class GitHubRepositoryModel {
   /// コンストラクタ
@@ -33,14 +35,18 @@ class GitHubRepositoryModel {
   final int openIssuesCount;
 
   /// JSONからGitHubRepositoryModelを生成するファクトリメソッド
-  factory GitHubRepositoryModel.fromJson(Map<String, dynamic> json) => GitHubRepositoryModel(
+  factory GitHubRepositoryModel.fromJson(Map<String, dynamic> json) =>
+      GitHubRepositoryModel(
         fullName: json['full_name'] ?? '',
-        ownerAvatarUrl: json['owner']?['avatar_url'] ?? '',
+        ownerAvatarUrl: json.validateUrl(json['owner']?['avatar_url']),
         language: json['language'],
-        stargazersCount: json['stargazers_count'] ?? 0,
-        watchersCount: json['watchers_count'] ?? 0,
-        forksCount: json['forks_count'] ?? 0,
-        openIssuesCount: json['open_issues_count'] ?? 0,
+        stargazersCount:
+            json.parseCount(json['stargazers_count'], 'stargazers_count'),
+        watchersCount:
+            json.parseCount(json['watchers_count'], 'watchers_count'),
+        forksCount: json.parseCount(json['forks_count'], 'forks_count'),
+        openIssuesCount:
+            json.parseCount(json['open_issues_count'], 'open_issues_count'),
       );
 
   /// JSONに変換するメソッド
