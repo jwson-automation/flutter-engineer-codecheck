@@ -33,7 +33,8 @@ class GitHubRepositoryModel {
   final int openIssuesCount;
 
   /// JSONからGitHubRepositoryModelを生成するファクトリメソッド
-  factory GitHubRepositoryModel.fromJson(Map<String, dynamic> json) => GitHubRepositoryModel(
+  factory GitHubRepositoryModel.fromJson(Map<String, dynamic> json) =>
+      GitHubRepositoryModel(
         fullName: json['full_name'] ?? '',
         ownerAvatarUrl: json['owner']?['avatar_url'] ?? '',
         language: json['language'],
