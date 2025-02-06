@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/presenter/repository_list_item.dart';
 
 /// GitHub Repository 検索画面
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  const SearchScreen({super.key});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -12,7 +13,32 @@ class _SearchScreenState extends State<SearchScreen> {
   // テキスト入力を管理するためのコントローラー
   final TextEditingController _searchTextController = TextEditingController();
   bool _isLoading = false;
-  List<dynamic> _searchResults = [];
+  // 仮の検索結果
+  List<dynamic> _searchResults = [
+    {
+      'full_name': 'flutter/flutter',
+      'description':
+          'Flutter makes it easy and fast to build beautiful apps for mobile and beyond',
+      'stargazers_count': 158432,
+      'forks_count': 25643,
+      'language': 'Dart',
+    },
+    {
+      'full_name': 'microsoft/vscode',
+      'description': 'Visual Studio Code',
+      'stargazers_count': 154321,
+      'forks_count': 28765,
+      'language': 'TypeScript',
+    },
+    {
+      'full_name': 'facebook/react',
+      'description':
+          'A declarative, efficient, and flexible JavaScript library for building user interfaces.',
+      'stargazers_count': 203456,
+      'forks_count': 42789,
+      'language': 'JavaScript',
+    }
+  ];
   String? _error;
 
   @override
@@ -59,7 +85,7 @@ class _SearchScreenState extends State<SearchScreen> {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: TextField(
                 controller: _searchTextController,
                 decoration: InputDecoration(
@@ -115,11 +141,11 @@ class _SearchScreenState extends State<SearchScreen> {
       itemCount: _searchResults.length,
       itemBuilder: (context, index) {
         final repository = _searchResults[index];
-        return Card(
-          child: ListTile(
-            // TODO: 検索結果 UI の実装
-            title: Text(repository.toString()),
-          ),
+        return RepositoryListItem(
+          repository: repository,
+          onTap: () {
+            // TODO: リポジトリ詳細画面への遷移機能の実装
+          },
         );
       },
     );
