@@ -2,7 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 検索に関連する状態とロジックを提供するプロバイダー
 /// StateNotifierProviderを使用して状態変更通知を購読可能
-final searchResultProvider = StateNotifierProvider<SearchNotifier, SearchState>((ref) {
+final searchResultProvider =
+    StateNotifierProvider<SearchNotifier, SearchState>((ref) {
   return SearchNotifier();
 });
 
@@ -48,13 +49,13 @@ class SearchNotifier extends StateNotifier<SearchState> {
     try {
       // 検索開始時にローディング状態に変更し、前回のエラーをリセット
       state = state.copyWith(isLoading: true, error: null);
-      
+
       final results = await _repository.searchRepositories(
         searchText: searchText,
         sort: 'stars',
         order: 'desc',
       );
-      
+
       // 検索結果を状態に反映し、ローディング状態を解除
       state = state.copyWith(
         searchResults: results,
