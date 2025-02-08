@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_config/flutter_config.dart';
+import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
 import 'package:http/http.dart' as http;
 
 // TODO : テストコード作成
@@ -17,13 +18,14 @@ class GitHubRepository {
   final String? token = FlutterConfig.get('GITHUB_TOKEN');
 
   /// 指定されたクエリでリポジトリを検索します
-  Future<Map<String, dynamic>> searchRepositories({
+  Future<List<GitHubRepositoryModel>> searchRepositories({
     required String searchText, // 検索するリポジトリ名やキーワード
     String? sort, // 'stars', 'forks', 'help-wanted-issues', 'updated' 並び順を指定
     String? order, // 'desc', 'asc' 並び順指定
     int perPage = 30, // 1ページあたりに表示するリポジトリの数（デフォルト: 30）
     int page = 1, // 取得するページ番号（デフォルト: 1）
   }) async {
+    print("token: $token");
     final queryParams = {
       'q': searchText, // 検索するテキスト
       'per_page': perPage.toString(), // 1ページに表示するリポジトリ数
@@ -58,14 +60,17 @@ class GitHubRepository {
     final response = await http.get(
       uri,
       headers: {
-        'Authorization': 'Bearer $token', // Personal Access Tokenをヘッダーに設定
         'Accept': 'application/vnd.github.v3+json', // GitHub APIのバージョンを指定
+        if (token != null) 'Authorization': 'token $token',
       },
     );
 
     // レスポンスのステータスコードが200（成功）の場合、レスポンスデータを返す
     if (response.statusCode == 200) {
-      return json.decode(response.body); // レスポンスボディをデコードして返す
+      final Map<String, dynamic> data = json.decode(response.body);
+      final List<dynamic> items = data['items'] as List<dynamic>;
+
+      return items.map((item) => GitHubRepositoryModel.fromJson(item)).toList();
     } else {
       // ステータスコードが200でない場合、例外をスロー
       throw Exception('リポジトリの検索に失敗しました: ${response.body}');
