@@ -91,5 +91,32 @@ void main() {
       expect(json['forks_count'], 500);
       expect(json['open_issues_count'], 50);
     });
+
+    // 往復Serializationテスト
+    test('fromJson -> toJson', () {
+      // テスト用JSONデータ
+      final json = {
+        'full_name': 'flutter/flutter',
+        'owner': {
+          'avatar_url':
+              'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
+        },
+        'description': 'Flutter makes it easy and fast to build beautiful apps',
+        'language': 'Dart',
+        'stargazers_count': 1000,
+        'watchers_count': 100,
+        'forks_count': 500,
+        'open_issues_count': 50,
+      };
+
+      // JSONからモデルを生成
+      final model = GitHubRepositoryModel.fromJson(json);
+
+      // モデルをJSONに変換
+      final newJson = model.toJson();
+
+      // モデルから生成したJSONと元のJSONが同じか確認
+      expect(newJson, json);
+    });
   });
 }

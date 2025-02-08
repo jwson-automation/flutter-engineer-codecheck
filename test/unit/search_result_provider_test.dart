@@ -4,8 +4,7 @@ import 'package:flutter_engineer_codecheck/presenter/search_result_provider.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// 検索結果プロバイダーのテストスイート
-/// 검색 결과 프로바이더 테스트 스위트
+/// 検索結果プロバイダーのテスト
 void main() {
   setUpAll(() {
     /// 環境変数の初期化
