@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/data/github_repository.dart';
 import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
-import 'package:flutter_engineer_codecheck/presenter/repository_list_item.dart';
+import 'package:flutter_engineer_codecheck/presenter/widgets/custom_search_bar.dart';
+import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
 
-/// GitHub Repository 検索画面
+/// GitHubリポジトリの検索画面
+/// 
+/// ユーザーがGitHubリポジトリを検索し、結果を表示する画面です。
+/// 検索バーと検索結果リストで構成されています。
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -12,20 +16,29 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  // テキスト入力を管理するためのコントローラー
+  /// 検索テキストを管理するコントローラー
   final TextEditingController _searchTextController = TextEditingController();
+  
+  /// GitHubリポジトリのAPI操作を行うインスタンス
   final GitHubRepository _repository = GitHubRepository();
+  
+  /// ローディング状態を管理するフラグ
   bool _isLoading = false;
+  
+  /// 検索結果のリポジトリリスト
   List<GitHubRepositoryModel> _searchResults = [];
+  
+  /// エラーメッセージを保持する変数
   String? _error;
 
   @override
   void dispose() {
-    // コントローラーの解放
+    // テキストコントローラーの解放
     _searchTextController.dispose();
     super.dispose();
   }
 
+  /// リポジトリを検索する非同期メソッド
   Future<void> _searchRepositories() async {
     if (_searchTextController.text.trim().isEmpty) return;
 
@@ -52,6 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
 
+  /// 検索をクリアするメソッド
   void _clearSearch() {
     setState(() {
       _searchTextController.text = '';
@@ -60,77 +74,32 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
+  /// リポジトリがタップされた時の処理
+  void _handleRepositoryTap(GitHubRepositoryModel repository) {
+    // TODO: リポジトリ詳細画面への遷移機能の実装
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('GitHub Repository 検索'),
+          title: const Text('GitHubリポジトリ検索'),
         ),
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: TextField(
-                controller: _searchTextController,
-                decoration: InputDecoration(
-                  hintText: 'リポジトリを検索...',
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: _searchTextController.text.isNotEmpty
-                      ? IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: _clearSearch,
-                        )
-                      : null,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                onSubmitted: (_) => _searchRepositories(),
-                onChanged: (_) => setState(() {}),
-              ),
+            CustomSearchBar(
+              controller: _searchTextController,
+              onSearch: _searchRepositories,
+              onClear: _clearSearch,
             ),
             Expanded(
-              child: _buildContent(),
+              child: SearchResultList(
+                isLoading: _isLoading,
+                error: _error,
+                searchResults: _searchResults,
+                onRepositoryTap: _handleRepositoryTap,
+              ),
             ),
           ],
         ),
       );
-
-  Widget _buildContent() {
-    if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    if (_error != null) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.error_outline, size: 48, color: Colors.red),
-            const SizedBox(height: 16),
-            Text(_error!, style: const TextStyle(color: Colors.red)),
-          ],
-        ),
-      );
-    }
-
-    if (_searchResults.isEmpty) {
-      return const Center(
-        child: Text('リポジトリを検索してください'),
-      );
-    }
-
-    return ListView.builder(
-      padding: const EdgeInsets.all(8),
-      itemCount: _searchResults.length,
-      itemBuilder: (context, index) {
-        final repository = _searchResults[index];
-        return RepositoryListItem(
-          repository: repository,
-          onTap: () {
-            // TODO: リポジトリ詳細画面への遷移機能の実装
-          },
-        );
-      },
-    );
-  }
 }
