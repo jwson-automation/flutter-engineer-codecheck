@@ -15,7 +15,7 @@ class CustomSearchBar extends ConsumerWidget {
     final searchTextNotifier = ref.read(searchTextProvider.notifier);
 
     final searchResultNotifier = ref.read(searchResultProvider.notifier);
-    
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: TextField(
