@@ -5,7 +5,7 @@ import 'package:flutter_engineer_codecheck/presenter/widgets/custom_search_bar.d
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
 
 /// GitHubリポジトリの検索画面
-/// 
+///
 /// ユーザーがGitHubリポジトリを検索し、結果を表示する画面です。
 /// 検索バーと検索結果リストで構成されています。
 class SearchScreen extends StatefulWidget {
@@ -18,16 +18,16 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   /// 検索テキストを管理するコントローラー
   final TextEditingController _searchTextController = TextEditingController();
-  
+
   /// GitHubリポジトリのAPI操作を行うインスタンス
   final GitHubRepository _repository = GitHubRepository();
-  
+
   /// ローディング状態を管理するフラグ
   bool _isLoading = false;
-  
+
   /// 検索結果のリポジトリリスト
   List<GitHubRepositoryModel> _searchResults = [];
-  
+
   /// エラーメッセージを保持する変数
   String? _error;
 

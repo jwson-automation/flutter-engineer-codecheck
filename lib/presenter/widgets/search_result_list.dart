@@ -8,13 +8,13 @@ import 'package:flutter_engineer_codecheck/presenter/widgets/repository_list_ite
 class SearchResultList extends StatelessWidget {
   /// ローディング状態を示すフラグ
   final bool isLoading;
-  
+
   /// エラーメッセージ（エラーがない場合はnull）
   final String? error;
-  
+
   /// 検索結果のリポジトリリスト
   final List<GitHubRepositoryModel> searchResults;
-  
+
   /// リポジトリがタップされた時のコールバック
   final Function(GitHubRepositoryModel) onRepositoryTap;
 
@@ -63,4 +63,4 @@ class SearchResultList extends StatelessWidget {
       },
     );
   }
-} 
+}

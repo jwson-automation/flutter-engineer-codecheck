@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 /// カスタム検索バーウィジェット
-/// 
+///
 /// リポジトリ検索用のテキスト入力フィールドを提供します。
 /// 検索アイコン、クリアボタン、検索実行機能を含みます。
 class CustomSearchBar extends StatelessWidget {
   /// テキスト入力を制御するコントローラー
   final TextEditingController controller;
-  
+
   /// 検索ボタンが押された時のコールバック
   final VoidCallback onSearch;
-  
+
   /// クリアボタンが押された時のコールバック
   final VoidCallback onClear;
 
@@ -43,4 +43,4 @@ class CustomSearchBar extends StatelessWidget {
           onChanged: (_) {},
         ),
       );
-} 
+}
