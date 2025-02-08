@@ -3,14 +3,22 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
 import 'package:http/http.dart' as http;
 
-// TODO : テストコード作成
 // TODO : Paging 処理を実装する
 // TODO : エラーハンドリングを実装する ( inheritanceで実装しようか )
 
 /// GitHub APIを使用してリポジトリを検索するクラス
 class GitHubRepository {
+  /// コンストラクタ
+  GitHubRepository({http.Client? client}) : _client = client ?? http.Client();
+
   /// GitHub APIのベースURL
   final String baseUrl = 'https://api.github.com';
+
+  /// HTTPクライアントのインスタンス
+  /// テスト環境では、MockClientを注入することで、実際のHTTPリクエストなしで
+  /// 事前に定義されたレスポンスを返すことができます。
+  /// 本番環境では、デフォルトのhttp.Clientを使用します。
+  final http.Client _client;
 
   /// GitHub APIのためのPersonal Access Token
   /// FlutterConfigを使用して環境変数から取得
@@ -19,17 +27,24 @@ class GitHubRepository {
 
   /// 指定されたクエリでリポジトリを検索します
   Future<List<GitHubRepositoryModel>> searchRepositories({
-    required String searchText, // 検索するリポジトリ名やキーワード
-    String? sort, // 'stars', 'forks', 'help-wanted-issues', 'updated' 並び順を指定
-    String? order, // 'desc', 'asc' 並び順指定
-    int perPage = 30, // 1ページあたりに表示するリポジトリの数（デフォルト: 30）
-    int page = 1, // 取得するページ番号（デフォルト: 1）
+    // 検索するリポジトリ名やキーワード
+    required String searchText,
+    // 'stars', 'forks', 'help-wanted-issues', 'updated' 並び順を指定
+    String? sort,
+    // 'desc', 'asc' 並び順指定
+    String? order,
+    // 1ページあたりに表示するリポジトリの数（デフォルト: 30）
+    int perPage = 30,
+    // 取得するページ番号（デフォルト: 1）
+    int page = 1,
   }) async {
-    print("token: $token");
     final queryParams = {
-      'q': searchText, // 検索するテキスト
-      'per_page': perPage.toString(), // 1ページに表示するリポジトリ数
-      'page': page.toString(), // ページ番号
+      // 検索するテキスト
+      'q': searchText,
+      // 1ページに表示するリポジトリ数
+      'per_page': perPage.toString(),
+      // ページ番号
+      'page': page.toString(),
     };
 
     // ソートオプションの有効性の確認
@@ -39,7 +54,8 @@ class GitHubRepository {
       if (!validSorts.contains(sort)) {
         throw ArgumentError('無効なソートオプションです。有効なオプションは: $validSorts');
       }
-      queryParams['sort'] = sort; // 有効なソートオプションをクエリに追加
+      // 有効なソートオプションをクエリに追加
+      queryParams['sort'] = sort;
     }
 
     // 順序オプションの有効性の確認
@@ -49,7 +65,9 @@ class GitHubRepository {
       if (!validOrders.contains(order)) {
         throw ArgumentError('無効な順序オプションです。"desc" または "asc" を指定してください');
       }
-      queryParams['order'] = order; // 有効な順序オプションをクエリに追加
+
+      // 有効な順序オプションをクエリに追加
+      queryParams['order'] = order;
     }
 
     // APIリクエストのためのURLの生成
@@ -57,10 +75,11 @@ class GitHubRepository {
         .replace(queryParameters: queryParams);
 
     // APIリクエストの送信
-    final response = await http.get(
+    final response = await _client.get(
       uri,
       headers: {
-        'Accept': 'application/vnd.github.v3+json', // GitHub APIのバージョンを指定
+        // GitHub APIのバージョンを指定
+        'Accept': 'application/vnd.github.v3+json',
         if (token != null) 'Authorization': 'token $token',
       },
     );
