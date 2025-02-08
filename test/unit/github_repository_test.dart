@@ -43,12 +43,15 @@ void main() {
             headers: any(named: 'headers'),
           )).thenAnswer((_) async => http.Response(responseJson, 200));
 
-      final results = await repository.searchRepositories(searchText: searchQuery);
+      final results =
+          await repository.searchRepositories(searchText: searchQuery);
 
       /// レスポンス結果の検証
       expect(results.length, 1);
-      expect(results[0].fullName, GitHubRepositoryFixtures.testRepositoryModel.fullName);
-      expect(results[0].stargazersCount, GitHubRepositoryFixtures.testRepositoryModel.stargazersCount);
+      expect(results[0].fullName,
+          GitHubRepositoryFixtures.testRepositoryModel.fullName);
+      expect(results[0].stargazersCount,
+          GitHubRepositoryFixtures.testRepositoryModel.stargazersCount);
     });
 
     /// エラー発生時の例外処理テスト

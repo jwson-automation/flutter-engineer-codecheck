@@ -8,7 +8,8 @@ void main() {
     /// 正常なJSONデータからモデルを作成するテスト
     test('fromJson creates correct model with valid data', () {
       // JSONからモデルを生成
-      final model = GitHubRepositoryModel.fromJson(GitHubRepositoryFixtures.testRepositoryJson);
+      final model = GitHubRepositoryModel.fromJson(
+          GitHubRepositoryFixtures.testRepositoryJson);
 
       // 各フィールドが正しく設定されているか検証
       expect(model.fullName, 'flutter/flutter');
@@ -59,7 +60,8 @@ void main() {
     /// 往復Serializationテスト
     test('fromJson -> toJson', () {
       // JSONからモデルを生成
-      final model = GitHubRepositoryModel.fromJson(GitHubRepositoryFixtures.testRepositoryJson);
+      final model = GitHubRepositoryModel.fromJson(
+          GitHubRepositoryFixtures.testRepositoryJson);
 
       // モデルをJSONに変換
       final newJson = model.toJson();

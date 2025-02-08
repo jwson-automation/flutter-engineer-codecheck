@@ -30,4 +30,4 @@ mixin GitHubRepositoryFixtures {
   /// オプションフィールドのないテストモデルインスタンス
   static final GitHubRepositoryModel testRepositoryModelWithMissingFields =
       GitHubRepositoryModel.fromJson(testRepositoryJsonWithMissingFields);
-} 
+}

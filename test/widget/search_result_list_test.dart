@@ -97,7 +97,8 @@ void main() {
       final repositories = [
         GitHubRepositoryModel(
           fullName: 'flutter/flutter',
-          ownerAvatarUrl: 'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
+          ownerAvatarUrl:
+              'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
           description: 'Flutter framework',
           language: 'Dart',
           stargazersCount: 1000,
@@ -107,7 +108,8 @@ void main() {
         ),
         GitHubRepositoryModel(
           fullName: 'dart-lang/dart-sdk',
-          ownerAvatarUrl: 'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
+          ownerAvatarUrl:
+              'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
           description: 'Dart SDK',
           language: 'Dart',
           stargazersCount: 800,
