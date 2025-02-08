@@ -34,7 +34,7 @@ void main() {
           {
             "full_name": "flutter/flutter",
             "owner": {
-              "avatar_url": "https://example.com/avatar.png"
+              "avatar_url": "https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png"
             },
             "description": "Flutter makes it easy and fast to build beautiful apps",
             "language": "Dart",
