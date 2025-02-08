@@ -17,13 +17,36 @@
   </tr>
 </table>
 
+
+## アプリのフロー
+```mermaid
+flowchart TD
+    A[App Start] --> B[Search Screen]
+    B --> C{Enter Keyword}
+    C --> |Keyword Input| D[GitHub API Search Request]
+    D --> E{Search Results Exist?}
+    E --> |Yes| F[Display Search Results List]
+    E --> |No| G[No Search Results Message]
+    F --> H[Select List Item]
+    H --> I[Repository Detail Screen]
+    I --> J[Display Details]
+    J --> |Include Info| K[Repository Name]
+    J --> |Include Info| L[Owner Icon]
+    J --> |Include Info| M[Project Language]
+    J --> |Include Info| N[Star Count]
+    J --> |Include Info| O[Watcher Count]
+    J --> |Include Info| P[Fork Count]
+    J --> |Include Info| Q[Issue Count]
+    G --> B
+    Q --> B
+```
+
 ### 検索画面
 - キーワード入力
 - リポジトリリスト表示
 
-
-
 ### 詳細情報画面
+
 表示項目:
 - リポジトリ名
 - 所有者アイコン
