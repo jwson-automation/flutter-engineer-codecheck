@@ -1,8 +1,8 @@
 import 'package:flutter_config/flutter_config.dart';
-import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
 import 'package:flutter_engineer_codecheck/presenter/search_result_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../fixtures/github_repository_fixtures.dart';
 
 /// 検索結果プロバイダーのテスト
 void main() {
@@ -27,17 +27,8 @@ void main() {
     /// SearchState copyWithメソッドの動作テスト
     test('SearchState copyWith method works correctly', () {
       final initialState = SearchState();
-      // テスト用のリポジトリモデルを作成
-      final repository = GitHubRepositoryModel(
-        fullName: 'test/repo',
-        ownerAvatarUrl: 'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
-        description: 'Test repository',
-        language: 'Dart',
-        stargazersCount: 100,
-        watchersCount: 50,
-        forksCount: 25,
-        openIssuesCount: 10,
-      );
+      // fixturesからテスト用のリポジトリモデルを使用
+      final repository = GitHubRepositoryFixtures.testRepositoryModel;
 
       // 新しい状態を作成して検証
       final newState = initialState.copyWith(
@@ -47,24 +38,15 @@ void main() {
       );
 
       expect(newState.searchResults.length, 1);
-      expect(newState.searchResults.first.fullName, 'test/repo');
+      expect(newState.searchResults.first.fullName, repository.fullName);
       expect(newState.isLoading, true);
       expect(newState.error, 'Test error');
     });
 
     /// copyWithメソッドが変更されていない値を維持することを確認するテスト
     test('SearchState copyWith maintains unchanged values', () {
-      // テスト用の初期状態を設定
-      final repository = GitHubRepositoryModel(
-        fullName: 'test/repo',
-        ownerAvatarUrl: 'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
-        description: 'Test repository',
-        language: 'Dart',
-        stargazersCount: 100,
-        watchersCount: 50,
-        forksCount: 25,
-        openIssuesCount: 10,
-      );
+      // fixturesからテスト用の初期状態を設定
+      final repository = GitHubRepositoryFixtures.testRepositoryModel;
 
       final initialState = SearchState(
         searchResults: [repository],
@@ -99,4 +81,4 @@ void main() {
       expect(state.error, null);
     });
   });
-} 
+}

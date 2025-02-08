@@ -1,28 +1,14 @@
 import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../fixtures/github_repository_fixtures.dart';
 
 /// GitHub リポジトリモデルのテストクラス
 void main() {
   group('GitHubRepositoryModel Tests', () {
     /// 正常なJSONデータからモデルを作成するテスト
     test('fromJson creates correct model with valid data', () {
-      // テスト用の有効なJSONデータを準備
-      final json = {
-        'full_name': 'flutter/flutter',
-        'owner': {
-          'avatar_url':
-              'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
-        },
-        'description': 'Flutter makes it easy and fast to build beautiful apps',
-        'language': 'Dart',
-        'stargazers_count': 1000,
-        'watchers_count': 100,
-        'forks_count': 500,
-        'open_issues_count': 50,
-      };
-
       // JSONからモデルを生成
-      final model = GitHubRepositoryModel.fromJson(json);
+      final model = GitHubRepositoryModel.fromJson(GitHubRepositoryFixtures.testRepositoryJson);
 
       // 各フィールドが正しく設定されているか検証
       expect(model.fullName, 'flutter/flutter');
@@ -41,20 +27,8 @@ void main() {
 
     /// オプションフィールドが欠落しているJSONデータの処理テスト
     test('fromJson handles missing optional fields', () {
-      // 説明と言語フィールドが欠落したJSONデータ
-      final json = {
-        'full_name': 'flutter/flutter',
-        'owner': {
-          'avatar_url':
-              'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
-        },
-        'stargazers_count': 1000,
-        'watchers_count': 100,
-        'forks_count': 500,
-        'open_issues_count': 50,
-      };
-
-      final model = GitHubRepositoryModel.fromJson(json);
+      final model = GitHubRepositoryModel.fromJson(
+          GitHubRepositoryFixtures.testRepositoryJsonWithMissingFields);
 
       // オプションフィールドがnullとして処理されることを確認
       expect(model.description, null);
@@ -63,18 +37,8 @@ void main() {
 
     /// モデルからJSONへの変換テスト
     test('toJson converts model to correct json format', () {
-      // テスト用のモデルインスタンスを作成
-      final model = GitHubRepositoryModel(
-        fullName: 'flutter/flutter',
-        ownerAvatarUrl:
-            'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
-        description: 'Flutter makes it easy and fast to build beautiful apps',
-        language: 'Dart',
-        stargazersCount: 1000,
-        watchersCount: 100,
-        forksCount: 500,
-        openIssuesCount: 50,
-      );
+      // テスト用のモデルインスタンスを使用
+      final model = GitHubRepositoryFixtures.testRepositoryModel;
 
       // モデルをJSONに変換
       final json = model.toJson();
@@ -92,31 +56,16 @@ void main() {
       expect(json['open_issues_count'], 50);
     });
 
-    // 往復Serializationテスト
+    /// 往復Serializationテスト
     test('fromJson -> toJson', () {
-      // テスト用JSONデータ
-      final json = {
-        'full_name': 'flutter/flutter',
-        'owner': {
-          'avatar_url':
-              'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
-        },
-        'description': 'Flutter makes it easy and fast to build beautiful apps',
-        'language': 'Dart',
-        'stargazers_count': 1000,
-        'watchers_count': 100,
-        'forks_count': 500,
-        'open_issues_count': 50,
-      };
-
       // JSONからモデルを生成
-      final model = GitHubRepositoryModel.fromJson(json);
+      final model = GitHubRepositoryModel.fromJson(GitHubRepositoryFixtures.testRepositoryJson);
 
       // モデルをJSONに変換
       final newJson = model.toJson();
 
       // モデルから生成したJSONと元のJSONが同じか確認
-      expect(newJson, json);
+      expect(newJson, GitHubRepositoryFixtures.testRepositoryJson);
     });
   });
 }
