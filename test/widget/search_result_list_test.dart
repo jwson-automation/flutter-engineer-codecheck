@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
-import 'package:flutter_engineer_codecheck/presenter/search_result_provider.dart';
 import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
+import 'package:flutter_engineer_codecheck/presenter/search_result_provider.dart';
+import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   FlutterConfig.loadValueForTesting({
@@ -46,6 +46,9 @@ void main() {
           ),
         ],
       );
+
+      // コンテナの破棄を追加
+      addTearDown(container.dispose);
 
       await tester.pumpWidget(
         UncontrolledProviderScope(
@@ -144,6 +147,13 @@ void main() {
       // スター、フォークアイコンが表示されているか確認
       expect(find.byIcon(Icons.star_border), findsNWidgets(2));
       expect(find.byIcon(Icons.fork_right), findsNWidgets(2));
+
+      // 数字が表示されているか確認
+      expect(find.text('1000'), findsOneWidget);
+      expect(find.text('500'), findsOneWidget);
+
+      // リストタイルが2つ表示されているか確認
+      expect(find.byType(ListTile), findsNWidgets(2));
     });
   });
 }

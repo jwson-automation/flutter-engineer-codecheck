@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_engineer_codecheck/presenter/search_screen.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/custom_search_bar.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 /// テストを実行するためのエントリーポイント
 void main() {
