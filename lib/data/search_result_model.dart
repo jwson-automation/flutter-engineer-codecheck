@@ -41,10 +41,10 @@ class SearchResultModel {
   final int openIssuesCount;
 
   /// 作成日時
-  final String createdAt;
+  final String? createdAt;
 
   /// 更新日時
-  final String updatedAt;
+  final String? updatedAt;
 
   /// JSONからGitHubRepositoryModelを生成するファクトリメソッド
   factory SearchResultModel.fromJson(Map<String, dynamic> json) =>
@@ -60,8 +60,12 @@ class SearchResultModel {
         forksCount: json.parseCount(json['forks_count'], 'forks_count'),
         openIssuesCount:
             json.parseCount(json['open_issues_count'], 'open_issues_count'),
-        createdAt: json['created_at'] ?? '',
-        updatedAt: json['updated_at'] ?? '',
+        createdAt: json['created_at'] != null
+            ? DateTime.parse(json['created_at']).toIso8601String()
+            : null,
+        updatedAt: json['updated_at'] != null
+            ? DateTime.parse(json['updated_at']).toIso8601String()
+            : null,
       );
 
   /// JSONに変換するメソッド

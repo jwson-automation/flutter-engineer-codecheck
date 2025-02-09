@@ -13,8 +13,12 @@ class DetailRepositoryDates extends StatelessWidget {
 
   /// 日付をフォーマットする
   String _formatDate(String dateString) {
-    final date = DateTime.parse(dateString);
-    return DateFormat('yyyy年 MM月 dd日').format(date);
+    try {
+      final date = DateTime.parse(dateString);
+      return DateFormat('yyyy年 MM月 dd日').format(date);
+    } catch (e) {
+      return '----年 --月 --日';
+    }
   }
 
   @override
