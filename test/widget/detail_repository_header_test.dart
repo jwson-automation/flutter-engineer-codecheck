@@ -6,7 +6,7 @@ import '../fixtures/github_repository_fixtures.dart';
 void main() {
   group('DetailRepositoryHeader', () {
     testWidgets('アバターとリポジトリ名が正常に表示されること', (tester) async {
-      final testData = GitHubRepositoryFixtures.testRepositoryJson;
+      const testData = GitHubRepositoryFixtures.testRepositoryJson;
       final avatarUrl = testData['owner']['avatar_url'] as String;
       final fullName = testData['full_name'] as String;
 

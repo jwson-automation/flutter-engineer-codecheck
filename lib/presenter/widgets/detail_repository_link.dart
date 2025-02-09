@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// リポジトリリンクボタンを表示するウィジェット
 class DetailRepositoryLink extends StatelessWidget {
-  const DetailRepositoryLink({Key? key}) : super(key: key);
+  const DetailRepositoryLink({super.key});
 
   @override
   Widget build(BuildContext context) => SizedBox(

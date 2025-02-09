@@ -4,10 +4,10 @@ import 'package:shimmer/shimmer.dart';
 /// リポジトリヘッダーを表示するウィジェット（アバター、リポジトリ名、戻るボタンを含む）
 class DetailRepositoryHeader extends StatelessWidget {
   const DetailRepositoryHeader({
-    Key? key,
     required this.avatarUrl,
     required this.fullName,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// リポジトリ所有者のアバターURL
   final String avatarUrl;
@@ -43,8 +43,8 @@ class DetailRepositoryHeader extends StatelessWidget {
 /// リポジトリのアバターを表示するウィジェット
 class DetailRepositoryAvatar extends StatelessWidget {
   const DetailRepositoryAvatar({
-    super.key,
     required this.avatarUrl,
+    super.key,
   });
 
   final String avatarUrl;

@@ -9,12 +9,15 @@ void main() {
     test('fromJson creates correct model with valid data', () {
       // JSONからモデルを生成
       final model = SearchResultModel.fromJson(
-          GitHubRepositoryFixtures.testRepositoryJson);
+        GitHubRepositoryFixtures.testRepositoryJson,
+      );
 
       // 各フィールドが正しく設定されているか検証
       expect(model.fullName, 'flutter/flutter');
-      expect(model.ownerAvatarUrl,
-          'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png');
+      expect(
+        model.ownerAvatarUrl,
+        'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
+      );
       expect(
         model.description,
         'Flutter makes it easy and fast to build beautiful apps',
@@ -29,7 +32,8 @@ void main() {
     /// オプションフィールドが欠落しているJSONデータの処理テスト
     test('fromJson handles missing optional fields', () {
       final model = SearchResultModel.fromJson(
-          GitHubRepositoryFixtures.testRepositoryJsonWithMissingFields);
+        GitHubRepositoryFixtures.testRepositoryJsonWithMissingFields,
+      );
 
       // オプションフィールドがnullとして処理されることを確認
       expect(model.description, null);
@@ -46,10 +50,14 @@ void main() {
 
       // 変換されたJSONの各フィールドを検証
       expect(json['full_name'], 'flutter/flutter');
-      expect(json['owner']['avatar_url'],
-          'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png');
-      expect(json['description'],
-          'Flutter makes it easy and fast to build beautiful apps');
+      expect(
+        json['owner']['avatar_url'],
+        'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
+      );
+      expect(
+        json['description'],
+        'Flutter makes it easy and fast to build beautiful apps',
+      );
       expect(json['language'], 'Dart');
       expect(json['stargazers_count'], 1000);
       expect(json['watchers_count'], 100);
@@ -61,7 +69,8 @@ void main() {
     test('fromJson -> toJson', () {
       // JSONからモデルを生成
       final model = SearchResultModel.fromJson(
-          GitHubRepositoryFixtures.testRepositoryJson);
+        GitHubRepositoryFixtures.testRepositoryJson,
+      );
 
       // モデルをJSONに変換
       final newJson = model.toJson();
