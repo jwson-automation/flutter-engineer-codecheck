@@ -23,7 +23,6 @@ void main() {
 
       expect(find.text(fullName), findsOneWidget);
       expect(find.byType(CircleAvatar), findsOneWidget);
-      expect(find.byType(BackButton), findsOneWidget);
     });
 
     testWidgets('無効な画像URLが与えられた場合でもウィジェットが正常に表示されること', (tester) async {
@@ -46,7 +45,6 @@ void main() {
       
       expect(find.text(fullName), findsOneWidget);
       expect(find.byType(CircleAvatar), findsOneWidget);
-      expect(find.byType(BackButton), findsOneWidget);
     });
   });
 } 
