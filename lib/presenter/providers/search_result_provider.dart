@@ -1,5 +1,6 @@
 import 'package:flutter_engineer_codecheck/data/github_repository.dart';
 import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
+import 'package:flutter_engineer_codecheck/data/error/exceptions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 検索に関連する状態とロジックを提供するプロバイダー
@@ -65,8 +66,12 @@ class SearchNotifier extends StateNotifier<SearchState> {
       );
     } catch (e) {
       // エラー発生時にエラーメッセージを状態に反映し、ローディング状態を解除
+      final errorMessage = e is GitHubException
+          // GitHubExceptionの場合はエラーメッセージを表示
+          ? '${e.runtimeType.toString().replaceAll('GitHub', '')}: ${e.message}'
+          : e.toString();
       state = state.copyWith(
-        error: e.toString(),
+        error: errorMessage,
         isLoading: false,
       );
     }
