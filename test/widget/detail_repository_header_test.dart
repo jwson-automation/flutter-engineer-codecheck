@@ -27,7 +27,8 @@ void main() {
 
     testWidgets('無効な画像URLが与えられた場合でもウィジェットが正常に表示されること', (tester) async {
       const invalidAvatarUrl = 'https://invalid-url.com/invalid.png';
-      final fullName = GitHubRepositoryFixtures.testRepositoryJson['full_name'] as String;
+      final fullName =
+          GitHubRepositoryFixtures.testRepositoryJson['full_name'] as String;
 
       await tester.pumpWidget(
         MaterialApp(
@@ -42,9 +43,9 @@ void main() {
 
       // 이미지 로딩 에러 발생 시 CircleAvatar의 fallback이 표시되는지 확인
       await tester.pumpAndSettle(); // 이미지 로딩 실패를 기다림
-      
+
       expect(find.text(fullName), findsOneWidget);
       expect(find.byType(CircleAvatar), findsOneWidget);
     });
   });
-} 
+}

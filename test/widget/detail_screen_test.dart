@@ -30,7 +30,8 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: DetailScreen(
-            searchResult: GitHubRepositoryFixtures.testRepositoryModelWithMissingFields,
+            searchResult:
+                GitHubRepositoryFixtures.testRepositoryModelWithMissingFields,
           ),
         ),
       );
@@ -47,4 +48,4 @@ void main() {
       expect(find.text('50'), findsOneWidget);
     });
   });
-} 
+}

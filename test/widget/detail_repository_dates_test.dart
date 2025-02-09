@@ -43,4 +43,4 @@ void main() {
       expect(find.text('Updated: ----年 --月 --日'), findsOneWidget);
     });
   });
-} 
+}

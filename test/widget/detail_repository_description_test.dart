@@ -5,7 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('DetailRepositoryDescription', () {
     testWidgets('説明が正しく表示されること', (tester) async {
-      const description = 'Flutter makes it easy and fast to build beautiful apps';
+      const description =
+          'Flutter makes it easy and fast to build beautiful apps';
 
       await tester.pumpWidget(
         const MaterialApp(
@@ -36,4 +37,4 @@ void main() {
       expect(find.text(longDescription), findsOneWidget);
     });
   });
-} 
+}
