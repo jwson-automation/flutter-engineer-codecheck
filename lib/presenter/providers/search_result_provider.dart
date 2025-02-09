@@ -1,5 +1,5 @@
 import 'package:flutter_engineer_codecheck/data/github_repository.dart';
-import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
+import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 検索に関連する状態とロジックを提供するプロバイダー
@@ -10,7 +10,7 @@ final searchResultProvider = StateNotifierProvider<SearchNotifier, SearchState>(
 /// 検索に関連する状態を管理するクラス
 class SearchState {
   /// [searchResults] 検索結果リスト
-  final List<GitHubRepositoryModel> searchResults;
+  final List<SearchResultModel> searchResults;
 
   /// [isLoading] 検索中のローディング状態
   final bool isLoading;
@@ -27,7 +27,7 @@ class SearchState {
   /// 現在の状態をコピーして新しい状態を生成するメソッド
   /// 変更しないフィールドにnullを渡すと既存の値が維持される
   SearchState copyWith({
-    List<GitHubRepositoryModel>? searchResults,
+    List<SearchResultModel>? searchResults,
     bool? isLoading,
     String? error,
   }) =>

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
-import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
+import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -95,7 +95,7 @@ void main() {
         (tester) async {
       // テスト用リポジトリデータを作成
       final repositories = [
-        GitHubRepositoryModel(
+        SearchResultModel(
           fullName: 'flutter/flutter',
           ownerAvatarUrl:
               'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',
@@ -106,7 +106,7 @@ void main() {
           forksCount: 500,
           openIssuesCount: 50,
         ),
-        GitHubRepositoryModel(
+        SearchResultModel(
           fullName: 'dart-lang/dart-sdk',
           ownerAvatarUrl:
               'https://miro.medium.com/v2/resize:fit:1400/1*wqkdAO5lgsF9_ubaNbmttA.png',

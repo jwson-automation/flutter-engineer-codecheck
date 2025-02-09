@@ -1,9 +1,9 @@
 import 'package:flutter_engineer_codecheck/shared/json_validation_extension.dart';
 
 /// GitHub リポジトリのモデル
-class GitHubRepositoryModel {
+class SearchResultModel {
   /// コンストラクタ
-  GitHubRepositoryModel({
+  SearchResultModel({
     required this.fullName,
     required this.ownerAvatarUrl,
     this.description,
@@ -39,8 +39,8 @@ class GitHubRepositoryModel {
   final int openIssuesCount;
 
   /// JSONからGitHubRepositoryModelを生成するファクトリメソッド
-  factory GitHubRepositoryModel.fromJson(Map<String, dynamic> json) =>
-      GitHubRepositoryModel(
+  factory SearchResultModel.fromJson(Map<String, dynamic> json) =>
+      SearchResultModel(
         fullName: json['full_name'] ?? '',
         ownerAvatarUrl: json.validateUrl(json['owner']?['avatar_url']),
         description: json['description'],

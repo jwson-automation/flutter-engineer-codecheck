@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
+import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:flutter_engineer_codecheck/presenter/detail_screen.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list_item.dart';
@@ -12,7 +12,7 @@ class SearchResultList extends ConsumerWidget {
   const SearchResultList({super.key});
 
   void _handleRepositoryTap(
-      BuildContext context, GitHubRepositoryModel searchResult) {
+      BuildContext context, SearchResultModel searchResult) {
     // リポジトリ詳細画面に遷移
     Navigator.of(context).push<void>(
       MaterialPageRoute(

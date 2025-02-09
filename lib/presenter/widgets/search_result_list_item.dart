@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
+import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 
 /// GitHub リポジトリの検索結果を表示するリストアイテムウィジェット
 class SearchResultListItem extends StatelessWidget {
@@ -10,7 +10,7 @@ class SearchResultListItem extends StatelessWidget {
   });
 
   /// リポジトリ情報
-  final GitHubRepositoryModel searchResult;
+  final SearchResultModel searchResult;
 
   /// タップ時のコールバック
   final VoidCallback? onTap;

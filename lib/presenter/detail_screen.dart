@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
+import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 
 /// GitHubリポジトリの詳細画面を表示するウィジェット
 class DetailScreen extends StatelessWidget {
@@ -9,7 +9,7 @@ class DetailScreen extends StatelessWidget {
   });
 
   /// 表示するGitHubリポジトリ情報
-  final GitHubRepositoryModel searchResult;
+  final SearchResultModel searchResult;
 
   @override
   Widget build(BuildContext context) => Scaffold(
