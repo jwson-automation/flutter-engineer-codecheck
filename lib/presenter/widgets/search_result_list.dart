@@ -12,7 +12,7 @@ class SearchResultList extends ConsumerWidget {
   const SearchResultList({super.key});
 
   void _handleRepositoryTap(
-      BuildContext context, SearchResultModel searchResult) {
+      BuildContext context, SearchResultModel searchResult,) {
     // リポジトリ詳細画面に遷移
     Navigator.of(context).push<void>(
       MaterialPageRoute(
@@ -37,7 +37,7 @@ class SearchResultList extends ConsumerWidget {
             const Icon(Icons.error_outline, size: 48, color: Colors.red),
             const SizedBox(height: 16),
             Text(searchResult.error!,
-                style: const TextStyle(color: Colors.red)),
+                style: const TextStyle(color: Colors.red),),
           ],
         ),
       );

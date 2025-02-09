@@ -6,8 +6,8 @@ class DetailRepositoryDates extends StatelessWidget {
   const DetailRepositoryDates({
     required this.createdAt,
     required this.updatedAt,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final String createdAt;
   final String updatedAt;
 

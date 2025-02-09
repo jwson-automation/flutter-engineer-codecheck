@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 /// リポジトリの統計情報を表示するウィジェット（スター、フォーク、ウォッチャー、イシュー）
 class DetailRepositoryStats extends StatelessWidget {
   const DetailRepositoryStats({
-    super.key,
-    required this.stars,
-    required this.forks,
-    required this.watchers,
-    required this.issues,
+    required this.stars, required this.forks, required this.watchers, required this.issues, super.key,
   });
 
   final int stars;
@@ -51,11 +47,8 @@ class DetailRepositoryStats extends StatelessWidget {
 /// 統計情報カードを表示するウィジェット
 class DetailStatCard extends StatelessWidget {
   const DetailStatCard({
-    Key? key,
-    required this.icon,
-    required this.value,
-    required this.label,
-  }) : super(key: key);
+    required this.icon, required this.value, required this.label, super.key,
+  });
 
   /// カードに表示するアイコン
   final IconData icon;

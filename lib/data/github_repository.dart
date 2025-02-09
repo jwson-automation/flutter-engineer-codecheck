@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_engineer_codecheck/data/error/error_handler_mixin.dart';
 import 'package:flutter_engineer_codecheck/data/search_result_model.dart';

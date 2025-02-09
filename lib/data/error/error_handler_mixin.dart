@@ -44,7 +44,7 @@ mixin GitHubErrorHandlerMixin {
         return GitHubValidationException(message ?? '入力値が正しくないか、リクエストが多すぎます。');
       case 503:
         return GitHubServiceUnavailableException(
-            message ?? 'サービスは一時的に利用できません。');
+            message ?? 'サービスは一時的に利用できません。',);
       default:
         return GitHubUnknownException(message ?? '不明なエラーが発生しました。');
     }

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 /// リポジトリで使用されているプログラミング言語を表示するウィジェット
 class DetailRepositoryLanguage extends StatelessWidget {
   const DetailRepositoryLanguage({
-    super.key,
-    required this.language,
+    required this.language, super.key,
   });
 
   final String language;
