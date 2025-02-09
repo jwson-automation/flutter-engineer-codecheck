@@ -11,13 +11,13 @@ class DetailRepositoryLanguage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
-    children: [
-      const Icon(Icons.circle, size: 12),
-      const SizedBox(width: 8),
-      Text(
-        language,
-        style: Theme.of(context).textTheme.bodyMedium,
-      ),
-    ],
-  );
+        children: [
+          const Icon(Icons.circle, size: 12),
+          const SizedBox(width: 8),
+          Text(
+            language,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ],
+      );
 }

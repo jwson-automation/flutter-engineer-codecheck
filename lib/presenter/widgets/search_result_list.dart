@@ -16,8 +16,7 @@ class SearchResultList extends ConsumerWidget {
     // リポジトリ詳細画面に遷移
     Navigator.of(context).push<void>(
       MaterialPageRoute(
-        builder: (context) =>
-            DetailScreen(searchResult: searchResult),
+        builder: (context) => DetailScreen(searchResult: searchResult),
       ),
     );
   }

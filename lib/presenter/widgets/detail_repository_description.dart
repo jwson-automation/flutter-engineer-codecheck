@@ -10,7 +10,7 @@ class DetailRepositoryDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Text(
-    description,
-    style: Theme.of(context).textTheme.bodyMedium,
-  );
+        description,
+        style: Theme.of(context).textTheme.bodyMedium,
+      );
 }
