@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 /// リポジトリの作成日と最終更新日を表示するウィジェット
 class DetailRepositoryDates extends StatelessWidget {
@@ -10,6 +11,12 @@ class DetailRepositoryDates extends StatelessWidget {
   final String createdAt;
   final String updatedAt;
 
+  /// 日付をフォーマットする
+  String _formatDate(String dateString) {
+    final date = DateTime.parse(dateString);
+    return DateFormat('yyyy年 MM月 dd日').format(date);
+  }
+
   @override
   Widget build(BuildContext context) => Column(
         children: [
@@ -18,7 +25,7 @@ class DetailRepositoryDates extends StatelessWidget {
               const Icon(Icons.calendar_today, size: 16),
               const SizedBox(width: 8),
               Text(
-                'Created: $createdAt',
+                'Created: ${_formatDate(createdAt)}',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
@@ -29,7 +36,7 @@ class DetailRepositoryDates extends StatelessWidget {
               const Icon(Icons.update, size: 16),
               const SizedBox(width: 8),
               Text(
-                'Last updated: $updatedAt',
+                'Updated: ${_formatDate(updatedAt)}',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],

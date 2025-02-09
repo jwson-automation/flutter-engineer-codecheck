@@ -10,8 +10,8 @@ import 'package:flutter_engineer_codecheck/presenter/widgets/detail_repository_s
 /// GitHubリポジトリの詳細画面を表示するウィジェット
 class DetailScreen extends StatelessWidget {
   const DetailScreen({
-    super.key,
     required this.searchResult,
+    super.key,
   });
 
   /// 表示するGitHubリポジトリ情報
@@ -42,16 +42,20 @@ class DetailScreen extends StatelessWidget {
                         const SizedBox(height: 24),
                         if (searchResult.language != null)
                           DetailRepositoryLanguage(
-                              language: searchResult.language!),
+                            language: searchResult.language!,
+                          ),
                         const SizedBox(height: 16),
                         if (searchResult.description != null)
                           DetailRepositoryDescription(
-                              description: searchResult.description!),
+                            description: searchResult.description!,
+                          ),
                         const SizedBox(height: 16),
-                        const DetailRepositoryDates(
-                          createdAt: 'March 15, 2023',
-                          updatedAt: 'January 28, 2024',
-                        ),
+                        if (searchResult.createdAt != null &&
+                            searchResult.updatedAt != null)
+                          DetailRepositoryDates(
+                            createdAt: searchResult.createdAt!,
+                            updatedAt: searchResult.updatedAt!,
+                          ),
                         const SizedBox(height: 24),
                         const DetailRepositoryLink(),
                       ],

@@ -74,7 +74,6 @@ class DetailStatCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon, size: 28),
-              const SizedBox(height: 8),
               Text(
                 value,
                 style: Theme.of(context).textTheme.headlineSmall,

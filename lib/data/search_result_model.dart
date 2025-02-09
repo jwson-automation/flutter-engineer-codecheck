@@ -12,6 +12,8 @@ class SearchResultModel {
     required this.watchersCount,
     required this.forksCount,
     required this.openIssuesCount,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   /// リポジトリ名
@@ -38,6 +40,12 @@ class SearchResultModel {
   /// Issue数
   final int openIssuesCount;
 
+  /// 作成日時
+  final String createdAt;
+
+  /// 更新日時
+  final String updatedAt;
+
   /// JSONからGitHubRepositoryModelを生成するファクトリメソッド
   factory SearchResultModel.fromJson(Map<String, dynamic> json) =>
       SearchResultModel(
@@ -52,6 +60,8 @@ class SearchResultModel {
         forksCount: json.parseCount(json['forks_count'], 'forks_count'),
         openIssuesCount:
             json.parseCount(json['open_issues_count'], 'open_issues_count'),
+        createdAt: json['created_at'] ?? '',
+        updatedAt: json['updated_at'] ?? '',
       );
 
   /// JSONに変換するメソッド
@@ -64,5 +74,7 @@ class SearchResultModel {
         'watchers_count': watchersCount,
         'forks_count': forksCount,
         'open_issues_count': openIssuesCount,
+        'created_at': createdAt,
+        'updated_at': updatedAt,
       };
 }
