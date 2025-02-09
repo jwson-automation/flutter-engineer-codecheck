@@ -4,9 +4,9 @@ import 'package:intl/intl.dart';
 /// リポジトリの作成日と最終更新日を表示するウィジェット
 class DetailRepositoryDates extends StatelessWidget {
   const DetailRepositoryDates({
-    Key? key,
     required this.createdAt,
     required this.updatedAt,
+    Key? key,
   }) : super(key: key);
   final String createdAt;
   final String updatedAt;
@@ -16,7 +16,7 @@ class DetailRepositoryDates extends StatelessWidget {
     try {
       final date = DateTime.parse(dateString);
       return DateFormat('yyyy年 MM月 dd日').format(date);
-    } catch (e) {
+    } catch (_) {
       return '----年 --月 --日';
     }
   }
