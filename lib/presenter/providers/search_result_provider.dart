@@ -5,16 +5,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// 検索に関連する状態とロジックを提供するプロバイダー
 /// StateNotifierProviderを使用して状態変更通知を購読可能
 final searchResultProvider = StateNotifierProvider<SearchNotifier, SearchState>(
-    (ref) => SearchNotifier(),);
+  (ref) => SearchNotifier(),
+);
 
 /// 検索に関連する状態を管理するクラス
 class SearchState {
-
   SearchState({
     this.searchResults = const [],
     this.isLoading = false,
     this.error,
   });
+
   /// [searchResults] 検索結果リスト
   final List<SearchResultModel> searchResults;
 

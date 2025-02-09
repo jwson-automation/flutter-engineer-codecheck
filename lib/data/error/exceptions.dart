@@ -1,6 +1,5 @@
 /// 基本 GitHub 例外クラス
 abstract class GitHubException implements Exception {
-
   GitHubException(this.message);
   final String message;
 }

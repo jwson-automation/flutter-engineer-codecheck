@@ -6,7 +6,14 @@ class SearchResultModel {
   SearchResultModel({
     required this.fullName,
     required this.ownerAvatarUrl,
-    required this.language, required this.stargazersCount, required this.watchersCount, required this.forksCount, required this.openIssuesCount, required this.createdAt, required this.updatedAt, this.description,
+    required this.language,
+    required this.stargazersCount,
+    required this.watchersCount,
+    required this.forksCount,
+    required this.openIssuesCount,
+    required this.createdAt,
+    required this.updatedAt,
+    this.description,
   });
 
   /// JSONからGitHubRepositoryModelを生成するファクトリメソッド

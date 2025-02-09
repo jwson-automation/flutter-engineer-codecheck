@@ -36,20 +36,27 @@ void main() {
         'items': [GitHubRepositoryFixtures.testRepositoryJson],
       });
 
-      when(() => mockClient.get(
-            Uri.parse(
-                'https://api.github.com/search/repositories?q=$searchQuery&per_page=30&page=1',),
-            headers: any(named: 'headers'),
-          ),).thenAnswer((_) async => http.Response(responseJson, 200));
+      when(
+        () => mockClient.get(
+          Uri.parse(
+            'https://api.github.com/search/repositories?q=$searchQuery&per_page=30&page=1',
+          ),
+          headers: any(named: 'headers'),
+        ),
+      ).thenAnswer((_) async => http.Response(responseJson, 200));
 
       final results =
           await repository.searchRepositories(searchText: searchQuery);
 
       expect(results.length, 1);
-      expect(results[0].fullName,
-          GitHubRepositoryFixtures.testRepositoryModel.fullName,);
-      expect(results[0].stargazersCount,
-          GitHubRepositoryFixtures.testRepositoryModel.stargazersCount,);
+      expect(
+        results[0].fullName,
+        GitHubRepositoryFixtures.testRepositoryModel.fullName,
+      );
+      expect(
+        results[0].stargazersCount,
+        GitHubRepositoryFixtures.testRepositoryModel.stargazersCount,
+      );
     });
 
     test('空の検索テキストの場合、GitHubValidationExceptionをスローすること', () {
@@ -82,11 +89,14 @@ void main() {
     test('ネットワークエラーの場合、GitHubNetworkExceptionをスローすること', () async {
       const searchQuery = 'flutter';
 
-      when(() => mockClient.get(
-            Uri.parse(
-                'https://api.github.com/search/repositories?q=$searchQuery&per_page=30&page=1',),
-            headers: any(named: 'headers'),
-          ),).thenThrow(const SocketException('ネットワーク接続を確認してください。'));
+      when(
+        () => mockClient.get(
+          Uri.parse(
+            'https://api.github.com/search/repositories?q=$searchQuery&per_page=30&page=1',
+          ),
+          headers: any(named: 'headers'),
+        ),
+      ).thenThrow(const SocketException('ネットワーク接続を確認してください。'));
 
       expect(
         () => repository.searchRepositories(searchText: searchQuery),
@@ -97,14 +107,19 @@ void main() {
     test('503エラーの場合、GitHubServiceUnavailableExceptionをスローすること', () async {
       const searchQuery = 'flutter';
 
-      when(() => mockClient.get(
-                Uri.parse(
-                    'https://api.github.com/search/repositories?q=$searchQuery&per_page=30&page=1',),
-                headers: any(named: 'headers'),
-              ),)
-          .thenAnswer((_) async => http.Response(
-              '{"message": "Service Unavailable", "documentation_url": "https://docs.github.com/"}',
-              503,),);
+      when(
+        () => mockClient.get(
+          Uri.parse(
+            'https://api.github.com/search/repositories?q=$searchQuery&per_page=30&page=1',
+          ),
+          headers: any(named: 'headers'),
+        ),
+      ).thenAnswer(
+        (_) async => http.Response(
+          '{"message": "Service Unavailable", "documentation_url": "https://docs.github.com/"}',
+          503,
+        ),
+      );
 
       expect(
         () => repository.searchRepositories(searchText: searchQuery),
@@ -117,11 +132,14 @@ void main() {
       const sort = 'stars';
       const order = 'desc';
 
-      when(() => mockClient.get(
-            Uri.parse(
-                'https://api.github.com/search/repositories?q=$searchQuery&per_page=30&page=1&sort=$sort&order=$order',),
-            headers: any(named: 'headers'),
-          ),).thenAnswer((_) async => http.Response('{"items": []}', 200));
+      when(
+        () => mockClient.get(
+          Uri.parse(
+            'https://api.github.com/search/repositories?q=$searchQuery&per_page=30&page=1&sort=$sort&order=$order',
+          ),
+          headers: any(named: 'headers'),
+        ),
+      ).thenAnswer((_) async => http.Response('{"items": []}', 200));
 
       final results = await repository.searchRepositories(
         searchText: searchQuery,
