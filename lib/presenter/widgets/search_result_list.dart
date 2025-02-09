@@ -33,16 +33,19 @@ class SearchResultList extends ConsumerWidget {
 
     if (searchResult.error != null) {
       return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.error_outline, size: 48, color: Colors.red),
-            const SizedBox(height: 16),
-            Text(
-              searchResult.error!,
-              style: const TextStyle(color: Colors.red),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error_outline, size: 48, color: Colors.red),
+              const SizedBox(height: 16),
+              Text(
+                searchResult.error!,
+                style: const TextStyle(color: Colors.red),
+              ),
+            ],
+          ),
         ),
       );
     }

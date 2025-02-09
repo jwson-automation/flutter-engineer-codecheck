@@ -41,7 +41,7 @@ class CustomSearchBar extends ConsumerWidget {
         ),
         onSubmitted: (value) {
           if (value.trim().isNotEmpty) {
-            searchResultNotifier.search(value.trim());
+            searchResultNotifier.search(value.trim(), context);
           }
         },
         onChanged: (value) {
