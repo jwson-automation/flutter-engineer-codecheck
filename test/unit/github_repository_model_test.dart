@@ -1,4 +1,4 @@
-import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
+import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../fixtures/github_repository_fixtures.dart';
 
@@ -8,7 +8,7 @@ void main() {
     /// 正常なJSONデータからモデルを作成するテスト
     test('fromJson creates correct model with valid data', () {
       // JSONからモデルを生成
-      final model = GitHubRepositoryModel.fromJson(
+      final model = SearchResultModel.fromJson(
           GitHubRepositoryFixtures.testRepositoryJson);
 
       // 各フィールドが正しく設定されているか検証
@@ -28,7 +28,7 @@ void main() {
 
     /// オプションフィールドが欠落しているJSONデータの処理テスト
     test('fromJson handles missing optional fields', () {
-      final model = GitHubRepositoryModel.fromJson(
+      final model = SearchResultModel.fromJson(
           GitHubRepositoryFixtures.testRepositoryJsonWithMissingFields);
 
       // オプションフィールドがnullとして処理されることを確認
@@ -60,7 +60,7 @@ void main() {
     /// 往復Serializationテスト
     test('fromJson -> toJson', () {
       // JSONからモデルを生成
-      final model = GitHubRepositoryModel.fromJson(
+      final model = SearchResultModel.fromJson(
           GitHubRepositoryFixtures.testRepositoryJson);
 
       // モデルをJSONに変換

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
+import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 
 /// GitHub リポジトリの検索結果を表示するリストアイテムウィジェット
-class RepositoryListItem extends StatelessWidget {
-  const RepositoryListItem({
-    required this.repository,
+class SearchResultListItem extends StatelessWidget {
+  const SearchResultListItem({
+    required this.searchResult,
     super.key,
     this.onTap,
   });
 
   /// リポジトリ情報
-  final GitHubRepositoryModel repository;
+  final SearchResultModel searchResult;
 
+  /// タップ時のコールバック
   final VoidCallback? onTap;
 
   @override
@@ -32,7 +33,7 @@ class RepositoryListItem extends StatelessWidget {
                   // リポジトリ名
                   Expanded(
                     child: Text(
-                      repository.fullName,
+                      searchResult.fullName,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -43,10 +44,10 @@ class RepositoryListItem extends StatelessWidget {
               ),
 
               // リポジトリの説明がある場合は表示
-              if (repository.description != null) ...[
+              if (searchResult.description != null) ...[
                 const SizedBox(height: 8),
                 Text(
-                  repository.description!,
+                  searchResult.description!,
                   style: const TextStyle(fontSize: 14),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -65,7 +66,7 @@ class RepositoryListItem extends StatelessWidget {
                   children: [
                     const Icon(Icons.star_border, size: 16),
                     const SizedBox(width: 4),
-                    Text('${repository.stargazersCount}'),
+                    Text('${searchResult.stargazersCount}'),
                   ],
                 ),
                 const SizedBox(width: 16),
@@ -75,18 +76,18 @@ class RepositoryListItem extends StatelessWidget {
                   children: [
                     const Icon(Icons.fork_right, size: 16),
                     const SizedBox(width: 4),
-                    Text('${repository.forksCount}'),
+                    Text('${searchResult.forksCount}'),
                   ],
                 ),
 
                 // 言語
                 const SizedBox(width: 16),
-                if (repository.language != null)
+                if (searchResult.language != null)
                   Row(
                     children: [
                       const Icon(Icons.code, size: 16),
                       const SizedBox(width: 4),
-                      Text(repository.language!),
+                      Text(searchResult.language!),
                     ],
                   ),
               ],

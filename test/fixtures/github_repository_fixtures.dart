@@ -1,4 +1,4 @@
-import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
+import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 
 /// GitHubリポジトリテストのための共通テストデータ
 mixin GitHubRepositoryFixtures {
@@ -15,6 +15,8 @@ mixin GitHubRepositoryFixtures {
     'watchers_count': 100,
     'forks_count': 500,
     'open_issues_count': 50,
+    'created_at': '2023-03-15T00:00:00Z',
+    'updated_at': '2024-01-28T00:00:00Z',
   };
 
   /// オプションフィールドのないテストJSONデータ
@@ -24,10 +26,10 @@ mixin GitHubRepositoryFixtures {
         ..remove('language');
 
   /// 基本テストモデルインスタンス
-  static final GitHubRepositoryModel testRepositoryModel =
-      GitHubRepositoryModel.fromJson(testRepositoryJson);
+  static final SearchResultModel testRepositoryModel =
+      SearchResultModel.fromJson(testRepositoryJson);
 
   /// オプションフィールドのないテストモデルインスタンス
-  static final GitHubRepositoryModel testRepositoryModelWithMissingFields =
-      GitHubRepositoryModel.fromJson(testRepositoryJsonWithMissingFields);
+  static final SearchResultModel testRepositoryModelWithMissingFields =
+      SearchResultModel.fromJson(testRepositoryJsonWithMissingFields);
 }

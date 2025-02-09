@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_engineer_codecheck/presenter/search_result_provider.dart';
-import 'package:flutter_engineer_codecheck/presenter/search_text_provider.dart';
+import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
+import 'package:flutter_engineer_codecheck/presenter/providers/search_text_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// カスタム検索バーウィジェット

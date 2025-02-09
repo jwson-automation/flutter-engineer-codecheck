@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_config/flutter_config.dart';
-import 'package:flutter_engineer_codecheck/data/github_repository_model.dart';
+import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:http/http.dart' as http;
 
 // TODO : Paging 処理を実装する
@@ -26,7 +26,7 @@ class GitHubRepository {
   final String? token = FlutterConfig.get('GITHUB_TOKEN');
 
   /// 指定されたクエリでリポジトリを検索します
-  Future<List<GitHubRepositoryModel>> searchRepositories({
+  Future<List<SearchResultModel>> searchRepositories({
     // 検索するリポジトリ名やキーワード
     required String searchText,
     // 'stars', 'forks', 'help-wanted-issues', 'updated' 並び順を指定
@@ -89,7 +89,7 @@ class GitHubRepository {
       final Map<String, dynamic> data = json.decode(response.body);
       final List<dynamic> items = data['items'] as List<dynamic>;
 
-      return items.map((item) => GitHubRepositoryModel.fromJson(item)).toList();
+      return items.map((item) => SearchResultModel.fromJson(item)).toList();
     } else {
       // ステータスコードが200でない場合、例外をスロー
       throw Exception('リポジトリの検索に失敗しました: ${response.body}');
