@@ -1,5 +1,5 @@
 import 'package:flutter_config/flutter_config.dart';
-import 'package:flutter_engineer_codecheck/presenter/search_result_provider.dart';
+import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../fixtures/github_repository_fixtures.dart';
