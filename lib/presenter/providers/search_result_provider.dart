@@ -68,45 +68,55 @@ class SearchNotifier extends StateNotifier<SearchState> {
         isLoading: false,
       );
     } catch (e) {
-      // エラー発生時にエラーメッセージを状態に反映し、ローディング状態を解除
-      final errorMessage = e is GitHubException
-          ? '${e.runtimeType.toString().replaceAll('GitHub', '')}: ${e.message}'
-          : e.toString();
+      final errorMessage = _formatErrorMessage(e);
       state = state.copyWith(
         error: errorMessage,
         isLoading: false,
       );
 
-      // エラーダイアログを表示
       if (!context.mounted) return;
-      
-      String title = 'エラーが発生しました';
-      String solution = '';
-      
-      if (e is GitHubServiceUnavailableException) {
-        title = 'APIリクエスト制限';
-        solution = 'しばらく時間をおいてから再度お試しください。';
-      } else if (e is GitHubNotModifiedException) {
-        title = '検索結果なし';
-        solution = '検索キーワードを変更して再度お試しください。';
-      } else if (e is GitHubNetworkException) {
-        title = 'ネットワークエラー';
-        solution = 'インターネット接続を確認して、もう一度お試しください。';
-      } else {
-        solution = 'アプリを再起動するか、しばらく時間をおいてから再度お試しください。';
-      }
-
-      await ErrorDialog.show(
-        context: context,
-        title: title,
-        message: errorMessage,
-        solution: solution,
-      );
+      await _showErrorDialog(context, e, errorMessage);
     }
   }
 
   /// 検索結果を初期化するメソッド
   void clearResults() {
     state = SearchState();
+  }
+
+  /// エラーメッセージをフォーマットするメソッド
+  String _formatErrorMessage(Object e) {
+    if (e is GitHubException) {
+      final type = e.runtimeType.toString().replaceAll('GitHub', '');
+      return '$type: ${e.message}';
+    }
+    return e.toString();
+  }
+
+  /// エラーダイアログを表示するメソッド
+  Future<void> _showErrorDialog(
+      BuildContext context, Object e, String errorMessage) async {
+    var title = 'エラーが発生しました';
+    var solution = '';
+
+    if (e is GitHubServiceUnavailableException) {
+      title = 'APIリクエスト制限';
+      solution = 'しばらく時間をおいてから再度お試しください。';
+    } else if (e is GitHubNotModifiedException) {
+      title = '検索結果なし';
+      solution = '検索キーワードを変更して再度お試しください。';
+    } else if (e is GitHubNetworkException) {
+      title = 'ネットワークエラー';
+      solution = 'インターネット接続を確認して、もう一度お試しください。';
+    } else {
+      solution = 'アプリを再起動するか、しばらく時間をおいてから再度お試しください。';
+    }
+
+    await ErrorDialog.show(
+      context: context,
+      title: title,
+      message: errorMessage,
+      solution: solution,
+    );
   }
 }
