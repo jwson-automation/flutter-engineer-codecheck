@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 
 /// リポジトリヘッダーを表示するウィジェット（アバター、リポジトリ名、戻るボタンを含む）
 class DetailRepositoryHeader extends StatelessWidget {
@@ -30,9 +31,7 @@ class DetailRepositoryHeader extends StatelessWidget {
             Expanded(
               child: Text(
                 fullName,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: AppFontStyle.repositoryName,
               ),
             ),
           ],

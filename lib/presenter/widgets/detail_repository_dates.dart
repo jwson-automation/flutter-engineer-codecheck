@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 
 /// リポジトリの作成日と最終更新日を表示するウィジェット
 class DetailRepositoryDates extends StatelessWidget {
@@ -30,7 +31,7 @@ class DetailRepositoryDates extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 'Created: ${_formatDate(createdAt)}',
-                style: Theme.of(context).textTheme.bodySmall,
+                style: AppFontStyle.metaInfo,
               ),
             ],
           ),
@@ -41,7 +42,7 @@ class DetailRepositoryDates extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 'Updated: ${_formatDate(updatedAt)}',
-                style: Theme.of(context).textTheme.bodySmall,
+                style: AppFontStyle.metaInfo,
               ),
             ],
           ),

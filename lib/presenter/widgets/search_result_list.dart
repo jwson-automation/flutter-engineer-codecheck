@@ -3,6 +3,7 @@ import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:flutter_engineer_codecheck/presenter/detail_screen.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list_item.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 検索結果リストウィジェット
@@ -42,7 +43,7 @@ class SearchResultList extends ConsumerWidget {
               const SizedBox(height: 16),
               Text(
                 searchResult.error!,
-                style: const TextStyle(color: Colors.red),
+                style: AppFontStyle.errorMessage,
               ),
             ],
           ),
@@ -51,8 +52,11 @@ class SearchResultList extends ConsumerWidget {
     }
 
     if (searchResult.searchResults.isEmpty) {
-      return const Center(
-        child: Text('検索結果がありません'),
+      return Center(
+        child: Text(
+          '検索結果がありません',
+          style: AppFontStyle.bodyMedium,
+        ),
       );
     }
 
