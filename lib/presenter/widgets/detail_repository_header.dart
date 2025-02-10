@@ -49,29 +49,32 @@ class DetailRepositoryAvatar extends StatelessWidget {
   final String avatarUrl;
 
   @override
-  Widget build(BuildContext context) => CircleAvatar(
-        child: Image.network(
-          avatarUrl,
-          errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) {
-              return child;
-            } else {
-              return Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              );
-            }
-          },
+  Widget build(BuildContext context) => ClipOval(
+    child: SizedBox(
+      width: 32,
+      height: 32,
+      child: Image.network(
+        avatarUrl,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => const Icon(
+          Icons.error,
+          size: 20,
         ),
-        radius: 16,
-      );
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return Shimmer.fromColors(
+            baseColor: Theme.of(context).primaryColor,
+            highlightColor: Theme.of(context).primaryColorLight,
+            child: Container(
+              width: 32,
+              height: 32,
+              color: Colors.white,
+            ),
+          );
+        },
+      ),
+    ),
+  );
 }
