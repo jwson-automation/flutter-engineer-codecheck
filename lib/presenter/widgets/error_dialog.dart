@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 
 /// エラーダイアログを表示するウィジェット
 class ErrorDialog extends StatelessWidget {
@@ -54,7 +55,7 @@ class ErrorDialog extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: theme.textTheme.titleLarge,
+                  style: AppFontStyle.dialogTitle,
                 ),
               ),
             ],
@@ -69,26 +70,26 @@ class ErrorDialog extends StatelessWidget {
           children: [
             Text(
               '問題',
-              style: theme.textTheme.titleMedium?.copyWith(
+              style: AppFontStyle.dialogMessage.copyWith(
                 color: theme.colorScheme.primary,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               message,
-              style: theme.textTheme.bodyLarge,
+              style: AppFontStyle.dialogMessage,
             ),
             const SizedBox(height: 16),
             Text(
               '解決方法',
-              style: theme.textTheme.titleMedium?.copyWith(
+              style: AppFontStyle.dialogMessage.copyWith(
                 color: theme.colorScheme.primary,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               solution,
-              style: theme.textTheme.bodyLarge,
+              style: AppFontStyle.dialogMessage,
             ),
           ],
         ),
@@ -98,7 +99,7 @@ class ErrorDialog extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
           child: Text(
             '閉じる',
-            style: theme.textTheme.labelLarge?.copyWith(
+            style: AppFontStyle.dialogMessage.copyWith(
               color: theme.colorScheme.primary,
             ),
           ),

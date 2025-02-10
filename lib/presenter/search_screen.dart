@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/custom_search_bar.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 
 /// GitHubリポジトリの検索画面
 ///
@@ -12,7 +13,10 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('GitHubリポジトリ検索'),
+          title: const Text(
+            'GitHubリポジトリ検索',
+            style: AppFontStyle.AppBarText,
+          ),
         ),
         body: const Column(
           children: [

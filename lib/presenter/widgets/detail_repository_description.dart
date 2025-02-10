@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 
 /// リポジトリの説明を表示するウィジェット
 class DetailRepositoryDescription extends StatelessWidget {
@@ -11,6 +12,6 @@ class DetailRepositoryDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
         description,
-        style: Theme.of(context).textTheme.bodyMedium,
+        style: AppFontStyle.repositoryDescription,
       );
 }

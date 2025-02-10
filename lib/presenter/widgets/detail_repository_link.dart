@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 
 /// リポジトリリンクボタンを表示するウィジェット
 class DetailRepositoryLink extends StatelessWidget {
@@ -9,7 +10,10 @@ class DetailRepositoryLink extends StatelessWidget {
         width: double.infinity,
         child: ElevatedButton.icon(
           icon: const Icon(Icons.open_in_new),
-          label: const Text('Go to Repository'),
+          label: Text(
+            'Go to Repository',
+            style: AppFontStyle.button,
+          ),
           onPressed: () {
             // TODO: リポジトリリンクを開く機能の実装
           },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 
 /// GitHub リポジトリの検索結果を表示するリストアイテムウィジェット
 class SearchResultListItem extends StatelessWidget {
@@ -34,10 +35,7 @@ class SearchResultListItem extends StatelessWidget {
                   Expanded(
                     child: Text(
                       searchResult.fullName,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                      style: AppFontStyle.searchResultTitle,
                     ),
                   ),
                 ],
@@ -48,7 +46,7 @@ class SearchResultListItem extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   searchResult.description!,
-                  style: const TextStyle(fontSize: 14),
+                  style: AppFontStyle.searchResultDescription,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -66,7 +64,7 @@ class SearchResultListItem extends StatelessWidget {
                   children: [
                     const Icon(Icons.star_border, size: 16),
                     const SizedBox(width: 4),
-                    Text('${searchResult.stargazersCount}'),
+                    Text('${searchResult.stargazersCount}', style: AppFontStyle.statsValue),
                   ],
                 ),
                 const SizedBox(width: 16),
@@ -76,7 +74,7 @@ class SearchResultListItem extends StatelessWidget {
                   children: [
                     const Icon(Icons.fork_right, size: 16),
                     const SizedBox(width: 4),
-                    Text('${searchResult.forksCount}'),
+                    Text('${searchResult.forksCount}', style: AppFontStyle.statsValue),
                   ],
                 ),
 
@@ -87,7 +85,7 @@ class SearchResultListItem extends StatelessWidget {
                     children: [
                       const Icon(Icons.code, size: 16),
                       const SizedBox(width: 4),
-                      Text(searchResult.language!),
+                      Text(searchResult.language!, style: AppFontStyle.metaInfo),
                     ],
                   ),
               ],

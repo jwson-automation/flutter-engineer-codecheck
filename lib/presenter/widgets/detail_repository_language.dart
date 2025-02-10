@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 
 /// リポジトリで使用されているプログラミング言語を表示するウィジェット
 class DetailRepositoryLanguage extends StatelessWidget {
@@ -16,7 +17,7 @@ class DetailRepositoryLanguage extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             language,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: AppFontStyle.metaInfo,
           ),
         ],
       );
