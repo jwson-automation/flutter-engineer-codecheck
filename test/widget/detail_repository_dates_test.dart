@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/detail_repository_dates.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   group('DetailRepositoryDates', () {
@@ -10,6 +14,17 @@ void main() {
 
       await tester.pumpWidget(
         const MaterialApp(
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            Locale('en'),
+            Locale('ja'),
+            Locale('ko'),
+          ],
           home: Scaffold(
             body: DetailRepositoryDates(
               createdAt: createdAt,
@@ -19,8 +34,21 @@ void main() {
         ),
       );
 
-      expect(find.text('Created: 2023年 03月 15日'), findsOneWidget);
-      expect(find.text('Updated: 2024年 01月 28日'), findsOneWidget);
+      await tester.pumpAndSettle();
+      final context = tester.element(find.byType(DetailRepositoryDates));
+      final dateFormat = DateFormat(context.localizations.dateFormat);
+      
+      final createdDate = dateFormat.format(DateTime.parse(createdAt));
+      final updatedDate = dateFormat.format(DateTime.parse(updatedAt));
+
+      expect(
+        find.text(context.localizations.createdDate(createdDate)),
+        findsOneWidget,
+      );
+      expect(
+        find.text(context.localizations.updatedDate(updatedDate)),
+        findsOneWidget,
+      );
       expect(find.byIcon(Icons.calendar_today), findsOneWidget);
       expect(find.byIcon(Icons.update), findsOneWidget);
     });
@@ -30,6 +58,17 @@ void main() {
 
       await tester.pumpWidget(
         const MaterialApp(
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            Locale('en'),
+            Locale('ja'),
+            Locale('ko'),
+          ],
           home: Scaffold(
             body: DetailRepositoryDates(
               createdAt: invalidDate,
@@ -39,8 +78,17 @@ void main() {
         ),
       );
 
-      expect(find.text('Created: ----年 --月 --日'), findsOneWidget);
-      expect(find.text('Updated: ----年 --月 --日'), findsOneWidget);
+      await tester.pumpAndSettle();
+      final context = tester.element(find.byType(DetailRepositoryDates));
+
+      expect(
+        find.text(context.localizations.createdDate(context.localizations.invalidDate)),
+        findsOneWidget,
+      );
+      expect(
+        find.text(context.localizations.updatedDate(context.localizations.invalidDate)),
+        findsOneWidget,
+      );
     });
   });
 }

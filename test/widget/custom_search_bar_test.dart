@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/custom_search_bar.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -14,6 +17,17 @@ void main() {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              Locale('en'),
+              Locale('ja'),
+              Locale('ko'),
+            ],
             home: Scaffold(
               body: CustomSearchBar(),
             ),
@@ -28,13 +42,25 @@ void main() {
       expect(find.byIcon(Icons.search), findsOneWidget);
 
       // ヒントテキストが正しいか確認
-      expect(find.text('リポジトリを検索...'), findsOneWidget);
+      final context = tester.element(find.byType(CustomSearchBar));
+      expect(find.text(context.localizations.searchBarHint), findsOneWidget);
     });
 
     testWidgets('Clear button appears when text is entered', (tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              Locale('en'),
+              Locale('ja'),
+              Locale('ko'),
+            ],
             home: Scaffold(
               body: CustomSearchBar(),
             ),
@@ -57,6 +83,17 @@ void main() {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              Locale('en'),
+              Locale('ja'),
+              Locale('ko'),
+            ],
             home: Scaffold(
               body: CustomSearchBar(),
             ),
@@ -80,6 +117,17 @@ void main() {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              Locale('en'),
+              Locale('ja'),
+              Locale('ko'),
+            ],
             home: Scaffold(
               body: CustomSearchBar(),
             ),
