@@ -3,8 +3,10 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../shared/test_widget.dart';
 
 void main() {
   FlutterConfig.loadValueForTesting({
@@ -25,16 +27,23 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            home: Scaffold(
-              body: SearchResultList(),
-            ),
+          child: buildTestApp(
+            const SearchResultList(),
           ),
         ),
       );
 
-      // ローディングインジケーターが表示されているか確認
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      // ローディング GIF イメージが表示されているか確認
+      final image = find.byType(Image);
+      expect(image, findsOneWidget);
+
+      // イメージウィジェットの属性を確認
+      final Image imageWidget = tester.widget<Image>(image);
+      expect((imageWidget.image as AssetImage).assetName,
+          'assets/yumemi_logo.gif');
+
+      // コンテナの破棄
+      addTearDown(container.dispose);
     });
 
     testWidgets('Shows error message when error occurs', (tester) async {
@@ -53,16 +62,13 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            home: Scaffold(
-              body: SearchResultList(),
-            ),
+          child: buildTestApp(
+            const SearchResultList(),
           ),
         ),
       );
 
       // エラーメッセージとアイコンが表示されているか確認
-      expect(find.text('エラーが発生しました'), findsOneWidget);
       expect(find.byIcon(Icons.error_outline), findsOneWidget);
     });
 
@@ -79,16 +85,16 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            home: Scaffold(
-              body: SearchResultList(),
-            ),
+          child: buildTestApp(
+            const SearchResultList(),
           ),
         ),
       );
+      await tester.pumpAndSettle();
 
+      final context = tester.element(find.byType(SearchResultList));
       // 検索結果が無いメッセージが表示されているか確認
-      expect(find.text('検索結果がありません'), findsOneWidget);
+      expect(find.text(context.localizations.noResults), findsOneWidget);
     });
 
     testWidgets('Shows list of repositories when results exist',
@@ -136,10 +142,8 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            home: Scaffold(
-              body: SearchResultList(),
-            ),
+          child: buildTestApp(
+            const SearchResultList(),
           ),
         ),
       );

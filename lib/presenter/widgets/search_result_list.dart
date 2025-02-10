@@ -3,6 +3,8 @@ import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:flutter_engineer_codecheck/presenter/detail_screen.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list_item.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 検索結果リストウィジェット
@@ -12,7 +14,9 @@ class SearchResultList extends ConsumerWidget {
   const SearchResultList({super.key});
 
   void _handleRepositoryTap(
-      BuildContext context, SearchResultModel searchResult) {
+    BuildContext context,
+    SearchResultModel searchResult,
+  ) {
     // リポジトリ詳細画面に遷移
     Navigator.of(context).push<void>(
       MaterialPageRoute(
@@ -26,26 +30,39 @@ class SearchResultList extends ConsumerWidget {
     final searchResult = ref.watch(searchResultProvider);
 
     if (searchResult.isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return Image.asset(
+        'assets/yumemi_logo.gif',
+        width: 300,
+        height: 300,
+      );
     }
 
     if (searchResult.error != null) {
       return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.error_outline, size: 48, color: Colors.red),
-            const SizedBox(height: 16),
-            Text(searchResult.error!,
-                style: const TextStyle(color: Colors.red)),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.error_outline,
+                  size: 48, color: context.colorScheme.error),
+              const SizedBox(height: 16),
+              Text(
+                searchResult.error!,
+                style: AppFontStyle.errorMessage,
+              ),
+            ],
+          ),
         ),
       );
     }
 
     if (searchResult.searchResults.isEmpty) {
-      return const Center(
-        child: Text('検索結果がありません'),
+      return Center(
+        child: Text(
+          context.localizations.noResults,
+          style: AppFontStyle.bodyMedium,
+        ),
       );
     }
 

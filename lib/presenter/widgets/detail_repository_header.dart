@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 
 /// リポジトリヘッダーを表示するウィジェット（アバター、リポジトリ名、戻るボタンを含む）
 class DetailRepositoryHeader extends StatelessWidget {
   const DetailRepositoryHeader({
-    Key? key,
     required this.avatarUrl,
     required this.fullName,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// リポジトリ所有者のアバターURL
   final String avatarUrl;
@@ -30,9 +31,7 @@ class DetailRepositoryHeader extends StatelessWidget {
             Expanded(
               child: Text(
                 fullName,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: AppFontStyle.repositoryName,
               ),
             ),
           ],
@@ -43,36 +42,41 @@ class DetailRepositoryHeader extends StatelessWidget {
 /// リポジトリのアバターを表示するウィジェット
 class DetailRepositoryAvatar extends StatelessWidget {
   const DetailRepositoryAvatar({
-    super.key,
     required this.avatarUrl,
+    super.key,
   });
 
   final String avatarUrl;
 
   @override
-  Widget build(BuildContext context) => CircleAvatar(
-        child: Image.network(
-          avatarUrl,
-          errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) {
-              return child;
-            } else {
-              return Shimmer.fromColors(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: const BoxDecoration(
+  Widget build(BuildContext context) => ClipOval(
+        child: SizedBox(
+          width: 32,
+          height: 32,
+          child: StreamBuilder<ImageChunkEvent?>(
+            stream: Stream.value(null),
+            builder: (context, snapshot) => Stack(
+              children: [
+                Shimmer.fromColors(
+                  baseColor: Theme.of(context).primaryColor,
+                  highlightColor: Theme.of(context).primaryColorLight,
+                  child: Container(
+                    width: 32,
+                    height: 32,
                     color: Colors.white,
-                    shape: BoxShape.circle,
                   ),
                 ),
-              );
-            }
-          },
+                Image.network(
+                  avatarUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => const Icon(
+                    Icons.error,
+                    size: 20,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-        radius: 16,
       );
 }

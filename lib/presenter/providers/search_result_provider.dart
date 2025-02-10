@@ -1,14 +1,25 @@
 import 'package:flutter_engineer_codecheck/data/github_repository.dart';
 import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
+import 'package:flutter_engineer_codecheck/data/error/exceptions.dart';
+import 'package:flutter_engineer_codecheck/presenter/widgets/error_dialog.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 検索に関連する状態とロジックを提供するプロバイダー
 /// StateNotifierProviderを使用して状態変更通知を購読可能
 final searchResultProvider = StateNotifierProvider<SearchNotifier, SearchState>(
-    (ref) => SearchNotifier());
+  (ref) => SearchNotifier(),
+);
 
 /// 検索に関連する状態を管理するクラス
 class SearchState {
+  SearchState({
+    this.searchResults = const [],
+    this.isLoading = false,
+    this.error,
+  });
+
   /// [searchResults] 検索結果リスト
   final List<SearchResultModel> searchResults;
 
@@ -17,12 +28,6 @@ class SearchState {
 
   /// [error] エラー発生時のエラーメッセージ
   final String? error;
-
-  SearchState({
-    this.searchResults = const [],
-    this.isLoading = false,
-    this.error,
-  });
 
   /// 現在の状態をコピーして新しい状態を生成するメソッド
   /// 変更しないフィールドにnullを渡すと既存の値が維持される
@@ -46,10 +51,11 @@ class SearchNotifier extends StateNotifier<SearchState> {
 
   /// 検索を実行するメソッド
   /// [searchText] 検索クエリ
-  Future<void> search(String searchText) async {
+  /// [context] エラーダイアログ表示用のBuildContext
+  Future<void> search(String searchText, BuildContext context) async {
     try {
       // 検索開始時にローディング状態に変更し、前回のエラーをリセット
-      state = state.copyWith(isLoading: true, error: null);
+      state = state.copyWith(isLoading: true);
 
       final results = await _repository.searchRepositories(
         searchText: searchText,
@@ -63,16 +69,55 @@ class SearchNotifier extends StateNotifier<SearchState> {
         isLoading: false,
       );
     } catch (e) {
-      // エラー発生時にエラーメッセージを状態に反映し、ローディング状態を解除
+      final errorMessage = _formatErrorMessage(e);
       state = state.copyWith(
-        error: e.toString(),
+        error: errorMessage,
         isLoading: false,
       );
+
+      if (!context.mounted) return;
+      await _showErrorDialog(context, e, errorMessage);
     }
   }
 
   /// 検索結果を初期化するメソッド
   void clearResults() {
     state = SearchState();
+  }
+
+  /// エラーメッセージをフォーマットするメソッド
+  String _formatErrorMessage(Object e) {
+    if (e is GitHubException) {
+      final type = e.runtimeType.toString().replaceAll('GitHub', '');
+      return '$type: ${e.message}';
+    }
+    return e.toString();
+  }
+
+  /// エラーダイアログを表示するメソッド
+  Future<void> _showErrorDialog(
+      BuildContext context, Object e, String errorMessage) async {
+    var title = context.localizations.errorDialogTitle;
+    var solution = '';
+
+    if (e is GitHubServiceUnavailableException) {
+      title = context.localizations.apiLimitTitle;
+      solution = context.localizations.apiLimitSolution;
+    } else if (e is GitHubNotModifiedException) {
+      title = context.localizations.searchErrorTitle;
+      solution = context.localizations.searchErrorSolution;
+    } else if (e is GitHubNetworkException) {
+      title = context.localizations.networkErrorTitle;
+      solution = context.localizations.networkErrorSolution;
+    } else {
+      solution = context.localizations.generalErrorSolution;
+    }
+
+    await ErrorDialog.show(
+      context: context,
+      title: title,
+      message: errorMessage,
+      solution: solution,
+    );
   }
 }

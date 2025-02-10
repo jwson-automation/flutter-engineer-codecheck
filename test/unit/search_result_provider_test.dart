@@ -2,7 +2,7 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../fixtures/github_repository_fixtures.dart';
+import '../shared/github_repository_fixtures.dart';
 
 /// 検索結果プロバイダーのテスト
 void main() {

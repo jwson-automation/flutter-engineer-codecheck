@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/detail_repository_dates.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/intl.dart';
+import '../shared/test_widget.dart';
 
 void main() {
   group('DetailRepositoryDates', () {
@@ -9,18 +12,29 @@ void main() {
       const updatedAt = '2024-01-28T00:00:00Z';
 
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: DetailRepositoryDates(
-              createdAt: createdAt,
-              updatedAt: updatedAt,
-            ),
+        buildTestApp(
+          const DetailRepositoryDates(
+            createdAt: createdAt,
+            updatedAt: updatedAt,
           ),
         ),
       );
 
-      expect(find.text('Created: 2023年 03月 15日'), findsOneWidget);
-      expect(find.text('Updated: 2024年 01月 28日'), findsOneWidget);
+      await tester.pumpAndSettle();
+      final context = tester.element(find.byType(DetailRepositoryDates));
+      final dateFormat = DateFormat(context.localizations.dateFormat);
+
+      final createdDate = dateFormat.format(DateTime.parse(createdAt));
+      final updatedDate = dateFormat.format(DateTime.parse(updatedAt));
+
+      expect(
+        find.text(context.localizations.createdDate(createdDate)),
+        findsOneWidget,
+      );
+      expect(
+        find.text(context.localizations.updatedDate(updatedDate)),
+        findsOneWidget,
+      );
       expect(find.byIcon(Icons.calendar_today), findsOneWidget);
       expect(find.byIcon(Icons.update), findsOneWidget);
     });
@@ -29,18 +43,27 @@ void main() {
       const invalidDate = 'invalid-date';
 
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: DetailRepositoryDates(
-              createdAt: invalidDate,
-              updatedAt: invalidDate,
-            ),
+        buildTestApp(
+          const DetailRepositoryDates(
+            createdAt: invalidDate,
+            updatedAt: invalidDate,
           ),
         ),
       );
 
-      expect(find.text('Created: ----年 --月 --日'), findsOneWidget);
-      expect(find.text('Updated: ----年 --月 --日'), findsOneWidget);
+      await tester.pumpAndSettle();
+      final context = tester.element(find.byType(DetailRepositoryDates));
+
+      expect(
+        find.text(context.localizations
+            .createdDate(context.localizations.invalidDate)),
+        findsOneWidget,
+      );
+      expect(
+        find.text(context.localizations
+            .updatedDate(context.localizations.invalidDate)),
+        findsOneWidget,
+      );
     });
   });
 }

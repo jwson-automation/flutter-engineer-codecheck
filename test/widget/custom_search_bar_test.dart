@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/custom_search_bar.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../shared/test_widget.dart';
 
 void main() {
   FlutterConfig.loadValueForTesting({
@@ -12,12 +13,8 @@ void main() {
   group('CustomSearchBar Widget Tests', () {
     testWidgets('CustomSearchBar renders correctly', (tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: Scaffold(
-              body: CustomSearchBar(),
-            ),
-          ),
+        buildTestApp(
+          const CustomSearchBar(),
         ),
       );
 
@@ -28,17 +25,14 @@ void main() {
       expect(find.byIcon(Icons.search), findsOneWidget);
 
       // ヒントテキストが正しいか確認
-      expect(find.text('リポジトリを検索...'), findsOneWidget);
+      final context = tester.element(find.byType(CustomSearchBar));
+      expect(find.text(context.localizations.searchBarHint), findsOneWidget);
     });
 
     testWidgets('Clear button appears when text is entered', (tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: Scaffold(
-              body: CustomSearchBar(),
-            ),
-          ),
+        buildTestApp(
+          const CustomSearchBar(),
         ),
       );
 
@@ -55,12 +49,8 @@ void main() {
 
     testWidgets('Clear button clears text', (tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: Scaffold(
-              body: CustomSearchBar(),
-            ),
-          ),
+        buildTestApp(
+          const CustomSearchBar(),
         ),
       );
 
@@ -78,12 +68,8 @@ void main() {
 
     testWidgets('Search is triggered on submit', (tester) async {
       await tester.pumpWidget(
-        const ProviderScope(
-          child: MaterialApp(
-            home: Scaffold(
-              body: CustomSearchBar(),
-            ),
-          ),
+        buildTestApp(
+          const CustomSearchBar(),
         ),
       );
 
