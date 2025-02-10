@@ -22,7 +22,7 @@ void main() {
       );
 
       expect(find.text(fullName), findsOneWidget);
-      expect(find.byType(CircleAvatar), findsOneWidget);
+      expect(find.byType(DetailRepositoryAvatar), findsOneWidget);
     });
 
     testWidgets('無効な画像URLが与えられた場合でもウィジェットが正常に表示されること', (tester) async {
@@ -40,12 +40,11 @@ void main() {
           ),
         ),
       );
-
-      // 이미지 로딩 에러 발생 시 CircleAvatar의 fallback이 표시되는지 확인
-      await tester.pumpAndSettle(); // 이미지 로딩 실패를 기다림
+      
+      await tester.pump(const Duration(seconds: 1));
 
       expect(find.text(fullName), findsOneWidget);
-      expect(find.byType(CircleAvatar), findsOneWidget);
+      expect(find.byType(DetailRepositoryAvatar), findsOneWidget);
     });
   });
 }
