@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../fixtures/github_repository_fixtures.dart';
+import '../shared/github_repository_fixtures.dart';
 
 void main() {
   group('DetailScreen', () {

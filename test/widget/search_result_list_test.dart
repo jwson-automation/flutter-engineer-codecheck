@@ -4,10 +4,9 @@ import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
 import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../shared/test_widget.dart';
 
 void main() {
   FlutterConfig.loadValueForTesting({
@@ -28,21 +27,8 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            localizationsDelegates: [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              Locale('en'),
-              Locale('ja'),
-              Locale('ko'),
-            ],
-            home: Scaffold(
-              body: SearchResultList(),
-            ),
+          child: buildTestApp(
+            const SearchResultList(),
           ),
         ),
       );
@@ -76,21 +62,8 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            localizationsDelegates: [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              Locale('en'),
-              Locale('ja'),
-              Locale('ko'),
-            ],
-            home: Scaffold(
-              body: SearchResultList(),
-            ),
+          child: buildTestApp(
+            const SearchResultList(),
           ),
         ),
       );
@@ -112,21 +85,8 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            localizationsDelegates: [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              Locale('en'),
-              Locale('ja'),
-              Locale('ko'),
-            ],
-            home: Scaffold(
-              body: SearchResultList(),
-            ),
+          child: buildTestApp(
+            const SearchResultList(),
           ),
         ),
       );
@@ -182,21 +142,8 @@ void main() {
       await tester.pumpWidget(
         UncontrolledProviderScope(
           container: container,
-          child: const MaterialApp(
-            localizationsDelegates: [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              Locale('en'),
-              Locale('ja'),
-              Locale('ko'),
-            ],
-            home: Scaffold(
-              body: SearchResultList(),
-            ),
+          child: buildTestApp(
+            const SearchResultList(),
           ),
         ),
       );

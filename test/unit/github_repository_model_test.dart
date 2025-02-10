@@ -1,6 +1,6 @@
 import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../fixtures/github_repository_fixtures.dart';
+import '../shared/github_repository_fixtures.dart';
 
 /// GitHub リポジトリモデルのテストクラス
 void main() {

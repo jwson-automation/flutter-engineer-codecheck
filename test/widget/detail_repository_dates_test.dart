@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
+import '../shared/test_widget.dart';
 
 void main() {
   group('DetailRepositoryDates', () {
@@ -13,23 +14,10 @@ void main() {
       const updatedAt = '2024-01-28T00:00:00Z';
 
       await tester.pumpWidget(
-        const MaterialApp(
-          localizationsDelegates: [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: [
-            Locale('en'),
-            Locale('ja'),
-            Locale('ko'),
-          ],
-          home: Scaffold(
-            body: DetailRepositoryDates(
-              createdAt: createdAt,
-              updatedAt: updatedAt,
-            ),
+        buildTestApp(
+          const DetailRepositoryDates(
+            createdAt: createdAt,
+            updatedAt: updatedAt,
           ),
         ),
       );

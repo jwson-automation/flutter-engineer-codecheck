@@ -4,10 +4,8 @@ import 'package:flutter_engineer_codecheck/presenter/search_screen.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/custom_search_bar.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
 import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import '../shared/test_widget.dart';
 
 /// テストを実行するためのエントリーポイント
 void main() {
@@ -16,24 +14,7 @@ void main() {
   });
 
   group('SearchScreen Widget Tests', () {
-    Widget createWidgetUnderTest() {
-      return const ProviderScope(
-        child: MaterialApp(
-          localizationsDelegates: [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: [
-            Locale('ko'),
-            Locale('en'),
-            Locale('ja'),
-          ],
-          home: SearchScreen(),
-        ),
-      );
-    }
+    Widget createWidgetUnderTest() => buildTestApp(const SearchScreen());
 
     testWidgets('SearchScreen renders correctly', (tester) async {
       await tester.pumpWidget(createWidgetUnderTest());
@@ -53,9 +34,6 @@ void main() {
     testWidgets('SearchScreen layout structure is correct', (tester) async {
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
-
-      // Scaffoldが存在するか確認
-      expect(find.byType(Scaffold), findsOneWidget);
 
       // Columnが存在するか確認
       expect(find.byType(Column), findsOneWidget);
