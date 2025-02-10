@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/detail_repository_dates.dart';
 import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 import '../shared/test_widget.dart';
@@ -25,7 +23,7 @@ void main() {
       await tester.pumpAndSettle();
       final context = tester.element(find.byType(DetailRepositoryDates));
       final dateFormat = DateFormat(context.localizations.dateFormat);
-      
+
       final createdDate = dateFormat.format(DateTime.parse(createdAt));
       final updatedDate = dateFormat.format(DateTime.parse(updatedAt));
 
@@ -45,23 +43,10 @@ void main() {
       const invalidDate = 'invalid-date';
 
       await tester.pumpWidget(
-        const MaterialApp(
-          localizationsDelegates: [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: [
-            Locale('en'),
-            Locale('ja'),
-            Locale('ko'),
-          ],
-          home: Scaffold(
-            body: DetailRepositoryDates(
-              createdAt: invalidDate,
-              updatedAt: invalidDate,
-            ),
+        buildTestApp(
+          const DetailRepositoryDates(
+            createdAt: invalidDate,
+            updatedAt: invalidDate,
           ),
         ),
       );
@@ -70,11 +55,13 @@ void main() {
       final context = tester.element(find.byType(DetailRepositoryDates));
 
       expect(
-        find.text(context.localizations.createdDate(context.localizations.invalidDate)),
+        find.text(context.localizations
+            .createdDate(context.localizations.invalidDate)),
         findsOneWidget,
       );
       expect(
-        find.text(context.localizations.updatedDate(context.localizations.invalidDate)),
+        find.text(context.localizations
+            .updatedDate(context.localizations.invalidDate)),
         findsOneWidget,
       );
     });
