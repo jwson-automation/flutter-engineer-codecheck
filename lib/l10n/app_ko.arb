@@ -39,5 +39,24 @@
   "invalidSortOption": "잘못된 정렬 옵션입니다",
   "invalidOrderOption": "잘못된 순서 옵션입니다",
   "invalidPageItemCount": "페이지당 항목 수는 1-100 사이여야 합니다",
-  "invalidPageNumber": "페이지 번호는 1 이상이어야 합니다"
+  "invalidPageNumber": "페이지 번호는 1 이상이어야 합니다",
+  "createdDate": "생성일: {date}",
+  "@createdDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "updatedDate": "수정일: {date}",
+  "@updatedDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dateFormat": "yyyy년 MM월 dd일",
+  "invalidDate": "----년 --월 --일",
+  "goToRepository": "리포지토리로 이동"
 } 

@@ -39,5 +39,24 @@
   "invalidSortOption": "Invalid sort option",
   "invalidOrderOption": "Invalid order option",
   "invalidPageItemCount": "Items per page must be between 1 and 100",
-  "invalidPageNumber": "Page number must be greater than 0"
+  "invalidPageNumber": "Page number must be greater than 0",
+  "createdDate": "Created: {date}",
+  "@createdDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "updatedDate": "Updated: {date}",
+  "@updatedDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dateFormat": "MMMM dd, yyyy",
+  "invalidDate": "---- --, ----",
+  "goToRepository": "Go to Repository"
 } 

@@ -39,5 +39,24 @@
   "invalidSortOption": "無効なソートオプションです",
   "invalidOrderOption": "無効な順序オプションです",
   "invalidPageItemCount": "ページあたりのアイテム数は1-100の間である必要があります",
-  "invalidPageNumber": "ページ番号は1以上である必要があります"
+  "invalidPageNumber": "ページ番号は1以上である必要があります",
+  "createdDate": "作成日: {date}",
+  "@createdDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "updatedDate": "更新日: {date}",
+  "@updatedDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dateFormat": "yyyy年 MM月 dd日",
+  "invalidDate": "----年 --月 --日",
+  "goToRepository": "リポジトリへ移動"
 } 

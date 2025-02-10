@@ -3,6 +3,7 @@ import 'package:flutter_engineer_codecheck/data/search_result_model.dart';
 import 'package:flutter_engineer_codecheck/data/error/exceptions.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/error_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 検索に関連する状態とロジックを提供するプロバイダー
@@ -96,20 +97,20 @@ class SearchNotifier extends StateNotifier<SearchState> {
   /// エラーダイアログを表示するメソッド
   Future<void> _showErrorDialog(
       BuildContext context, Object e, String errorMessage) async {
-    var title = 'エラーが発生しました';
+    var title = context.localizations.errorDialogTitle;
     var solution = '';
 
     if (e is GitHubServiceUnavailableException) {
-      title = 'APIリクエスト制限';
-      solution = 'しばらく時間をおいてから再度お試しください。';
+      title = context.localizations.apiLimitTitle;
+      solution = context.localizations.apiLimitSolution;
     } else if (e is GitHubNotModifiedException) {
-      title = '検索結果なし';
-      solution = '検索キーワードを変更して再度お試しください。';
+      title = context.localizations.searchErrorTitle;
+      solution = context.localizations.searchErrorSolution;
     } else if (e is GitHubNetworkException) {
-      title = 'ネットワークエラー';
-      solution = 'インターネット接続を確認して、もう一度お試しください。';
+      title = context.localizations.networkErrorTitle;
+      solution = context.localizations.networkErrorSolution;
     } else {
-      solution = 'アプリを再起動するか、しばらく時間をおいてから再度お試しください。';
+      solution = context.localizations.generalErrorSolution;
     }
 
     await ErrorDialog.show(

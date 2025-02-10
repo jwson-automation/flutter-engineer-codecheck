@@ -3,6 +3,7 @@ import 'package:flutter_engineer_codecheck/presenter/providers/theme_provider.da
 import 'package:flutter_engineer_codecheck/presenter/widgets/custom_search_bar.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list.dart';
 import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// GitHubリポジトリの検索画面
@@ -39,7 +40,7 @@ class SearchScreenAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
     return AppBar(
       title: Text(
-        'GitHubリポジトリ検索',
+        context.localizations.appTitle,
         style: AppFontStyle.appBarText,
       ),
       actions: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 
 /// エラーダイアログを表示するウィジェット
 class ErrorDialog extends StatelessWidget {
@@ -36,12 +37,9 @@ class ErrorDialog extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return AlertDialog(
-      backgroundColor: theme.dialogTheme.backgroundColor,
-      elevation: theme.dialogTheme.elevation,
+  Widget build(BuildContext context) => AlertDialog(
+      backgroundColor: context.theme.dialogTheme.backgroundColor,
+      elevation: context.theme.dialogTheme.elevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -50,13 +48,13 @@ class ErrorDialog extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.error_outline, color: theme.colorScheme.error),
+              Icon(Icons.error_outline, color: context.colorScheme.error),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   title,
                   style: AppFontStyle.dialogTitle.copyWith(
-                    color: theme.colorScheme.error,
+                    color: context.colorScheme.error,
                   ),
                 ),
               ),
@@ -71,9 +69,9 @@ class ErrorDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '問題',
+              context.localizations.errorDialogProblem,
               style: AppFontStyle.dialogMessage.copyWith(
-                color: theme.colorScheme.primary,
+                color: context.colorScheme.primary,
               ),
             ),
             const SizedBox(height: 8),
@@ -83,9 +81,9 @@ class ErrorDialog extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              '解決方法',
+              context.localizations.errorDialogSolution,
               style: AppFontStyle.dialogMessage.copyWith(
-                color: theme.colorScheme.primary,
+                color: context.colorScheme.primary,
               ),
             ),
             const SizedBox(height: 8),
@@ -100,13 +98,12 @@ class ErrorDialog extends StatelessWidget {
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(
-            '閉じる',
+            context.localizations.errorDialogClose,
             style: AppFontStyle.dialogMessage.copyWith(
-              color: theme.colorScheme.primary,
+              color: context.colorScheme.primary,
             ),
           ),
         ),
       ],
     );
-  }
 }
