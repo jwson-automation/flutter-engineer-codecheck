@@ -1,108 +1,88 @@
 import 'package:flutter/material.dart';
 
 /// アプリ全体で使用するテキストスタイルの定義
-class AppFontStyle {
-  /// ダイアログ関連のスタイル
-  static const TextStyle dialogTitle = TextStyle(
+mixin AppFontStyle {
+  /// ダイアログタイトルのスタイル
+  /// 使用: error_dialog.dart - エラーダイアログのタイトル表示
+  static const dialogTitle = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
-    color: Colors.white,
-    height: 1.2,
   );
 
   /// ダイアログメッセージのスタイル
-  static const TextStyle dialogMessage = TextStyle(
+  /// 使用: error_dialog.dart - エラーダイアログの本文メッセージ表示
+  static const dialogMessage = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,
-    color: Colors.white70,
-    height: 1.5,
   );
 
-  /// リポジトリ詳細画面のスタイル
-  static const TextStyle repositoryName = TextStyle(
+  /// リポジトリ名のスタイル
+  /// 使用: detail_repository_header.dart - リポジトリ詳細画面のリポジトリ名表示
+  static const repositoryName = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w600,
-    color: Colors.white,
-    height: 1.2,
   );
 
-  /// リポジトリ詳細画面のスタイル
-  static const TextStyle repositoryDescription = TextStyle(
+  /// リポジトリ説明のスタイル
+  /// 使用: detail_repository_description.dart - リポジトリ詳細画面の説明文表示
+  static const repositoryDescription = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
-    color: Colors.white70,
-    height: 1.5,
   );
 
-  /// 検索結果リストのスタイル
-  static const TextStyle searchResultTitle = TextStyle(
+  /// 検索結果タイトルのスタイル
+  /// 使用: search_result_list_item.dart - 検索結果リストのリポジトリ名表示
+  static const searchResultTitle = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    color: Colors.white,
-    height: 1.2,
   );
 
-  /// 検索結果リストのスタイル
-  static const TextStyle searchResultDescription = TextStyle(
+  /// 検索結果説明のスタイル
+  /// 使用: search_result_list_item.dart - 検索結果リストのリポジトリ説明表示
+  static const searchResultDescription = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
-    color: Colors.white70,
-    height: 1.5,
   );
 
-  /// 統計情報のスタイル
-  static const TextStyle statsValue = TextStyle(
+  /// 統計数値のスタイル
+  /// 使用: search_result_list_item.dart - スター数、フォーク数などの統計数値表示
+  static const statsValue = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    color: Colors.white,
-    height: 1.2,
   );
 
-  /// 統計情報のラベルスタイル
-  static const TextStyle statsLabel = TextStyle(
-    fontSize: 12,
-    fontWeight: FontWeight.normal,
-    color: Colors.white54,
-    height: 1.2,
-  );
-
-  /// メタ情報のスタイル（言語、日付など）
-  static const TextStyle metaInfo = TextStyle(
+  /// メタ情報のスタイル
+  /// 使用: detail_repository_dates.dart, detail_repository_language.dart - 言語、作成日、更新日などのメタ情報表示
+  static const metaInfo = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
-    color: Colors.white70,
-    height: 1.4,
   );
 
   /// エラーメッセージのスタイル
-  static const TextStyle errorMessage = TextStyle(
+  /// 使用: search_result_list.dart - 検索結果リストのエラーメッセージ表示
+  static const errorMessage = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
-    color: Colors.redAccent,
-    height: 1.4,
   );
 
   /// 基本テキストスタイル
-  static const TextStyle bodyMedium = TextStyle(
+  /// 使用: search_result_list.dart - 検索結果が無い場合のメッセージ表示
+  static const bodyMedium = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
-    color: Colors.white70,
-    height: 1.5,
   );
 
   /// ボタンテキストスタイル
-  static const TextStyle button = TextStyle(
+  /// 使用: detail_repository_link.dart - リポジトリリンクボタンのテキスト表示
+  static const button = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    color: Colors.white,
-    height: 1.2,
   );
 
   /// アプリバーテキストスタイル
-  static const TextStyle AppBarText = TextStyle(
+  /// 使用: search_screen.dart - アプリバーのタイトルテキスト表示
+  static const appBarText = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w600,
-    color: Colors.white,
-    height: 1.2,
   );
 }

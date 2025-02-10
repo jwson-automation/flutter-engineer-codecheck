@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// 앱에서 사용되는 색상 정의
+/// アプリで使用する色の定義
 class AppColor {
-  /// 라이트 모드 색상
+  /// ライトモードの色
   static const lightColors = AppColorScheme(
     scaffoldBackground: Color(0xFFF5F5F5),
     appBarBackground: Color(0xFFFFFFFF),
@@ -15,7 +15,7 @@ class AppColor {
     error: Colors.redAccent,
   );
 
-  /// 다크 모드 색상
+  /// ダークモードの色
   static const darkColors = AppColorScheme(
     scaffoldBackground: Color(0xFF1B262C),
     appBarBackground: Color(0xFF1E2A3A),
@@ -29,7 +29,7 @@ class AppColor {
   );
 }
 
-/// 색상 스키마 클래스
+/// カラースキーマクラス
 class AppColorScheme {
   final Color scaffoldBackground;
   final Color appBarBackground;

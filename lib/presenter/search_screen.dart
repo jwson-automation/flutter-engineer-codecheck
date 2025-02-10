@@ -38,9 +38,9 @@ class SearchScreenAppBar extends ConsumerWidget implements PreferredSizeWidget {
     final themeModeNotifier = ref.watch(themeProvider.notifier);
 
     return AppBar(
-      title: const Text(
+      title: Text(
         'GitHubリポジトリ検索',
-        style: AppFontStyle.AppBarText,
+        style: AppFontStyle.appBarText,
       ),
       actions: [
         IconButton(

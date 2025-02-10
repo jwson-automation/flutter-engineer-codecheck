@@ -52,7 +52,7 @@ class SearchResultList extends ConsumerWidget {
     }
 
     if (searchResult.searchResults.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
           '検索結果がありません',
           style: AppFontStyle.bodyMedium,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
 
 /// リポジトリの統計情報を表示するウィジェット（スター、フォーク、ウォッチャー、イシュー）
 class DetailRepositoryStats extends StatelessWidget {
@@ -76,11 +77,11 @@ class DetailStatCard extends StatelessWidget {
               Icon(icon, size: 28),
               Text(
                 value,
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: AppFontStyle.statsValue,
               ),
               Text(
                 label,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: AppFontStyle.statsValue,
               ),
             ],
           ),
