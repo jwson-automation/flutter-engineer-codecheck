@@ -50,33 +50,33 @@ class DetailRepositoryAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ClipOval(
-    child: SizedBox(
-      width: 32,
-      height: 32,
-      child: StreamBuilder<ImageChunkEvent?>(
-        stream: Stream.value(null),
-        builder: (context, snapshot) => Stack(
-          children: [
-            Shimmer.fromColors(
-              baseColor: Theme.of(context).primaryColor,
-              highlightColor: Theme.of(context).primaryColorLight,
-              child: Container(
-                width: 32,
-                height: 32,
-                color: Colors.white,
-              ),
+        child: SizedBox(
+          width: 32,
+          height: 32,
+          child: StreamBuilder<ImageChunkEvent?>(
+            stream: Stream.value(null),
+            builder: (context, snapshot) => Stack(
+              children: [
+                Shimmer.fromColors(
+                  baseColor: Theme.of(context).primaryColor,
+                  highlightColor: Theme.of(context).primaryColorLight,
+                  child: Container(
+                    width: 32,
+                    height: 32,
+                    color: Colors.white,
+                  ),
+                ),
+                Image.network(
+                  avatarUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => const Icon(
+                    Icons.error,
+                    size: 20,
+                  ),
+                ),
+              ],
             ),
-            Image.network(
-              avatarUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => const Icon(
-                Icons.error,
-                size: 20,
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
-    ),
-  );
+      );
 }

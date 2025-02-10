@@ -39,7 +39,8 @@ void main() {
 
       // イメージウィジェットの属性を確認
       final Image imageWidget = tester.widget<Image>(image);
-      expect((imageWidget.image as AssetImage).assetName, 'assets/yumemi_logo.gif');
+      expect((imageWidget.image as AssetImage).assetName,
+          'assets/yumemi_logo.gif');
 
       // コンテナの破棄
       addTearDown(container.dispose);
