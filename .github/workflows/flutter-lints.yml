@@ -23,6 +23,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      # Flutterのローカライズファイルを生成します。
+      - name: Generate l10n
+        run: flutter gen-l10n
+
       # Flutterコード解析を実行します。
       # --no-fatal-infosオプションは情報メッセージをエラーとして扱わないようにします。
       - name: Run Flutter Lint

@@ -22,6 +22,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      # Flutterのローカライズファイルを生成します。
+      - name: Generate l10n
+        run: flutter gen-l10n
+
       # .env ファイル生成
       - name: Create .env file
         run: |
