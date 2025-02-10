@@ -39,7 +39,7 @@ class SearchState {
       SearchState(
         searchResults: searchResults ?? this.searchResults,
         isLoading: isLoading ?? this.isLoading,
-        error: error ?? this.error,
+        error: error,
       );
 }
 
@@ -55,7 +55,10 @@ class SearchNotifier extends StateNotifier<SearchState> {
   Future<void> search(String searchText, BuildContext context) async {
     try {
       // 検索開始時にローディング状態に変更し、前回のエラーをリセット
-      state = state.copyWith(isLoading: true);
+      state = state.copyWith(
+        isLoading: true,
+        error: null,
+      );
 
       final results = await _repository.searchRepositories(
         searchText: searchText,
