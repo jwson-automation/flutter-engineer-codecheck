@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 
-import '../fixtures/github_repository_fixtures.dart';
+import '../shared/github_repository_fixtures.dart';
 
 /// HTTPクライアントのモッククラス
 class MockHttpClient extends Mock implements http.Client {}

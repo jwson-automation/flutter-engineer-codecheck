@@ -4,6 +4,7 @@ import 'package:flutter_engineer_codecheck/presenter/detail_screen.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
 import 'package:flutter_engineer_codecheck/presenter/widgets/search_result_list_item.dart';
 import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 検索結果リストウィジェット
@@ -43,7 +44,8 @@ class SearchResultList extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.error_outline, size: 48, color: Colors.red),
+              Icon(Icons.error_outline,
+                  size: 48, color: context.colorScheme.error),
               const SizedBox(height: 16),
               Text(
                 searchResult.error!,
@@ -58,7 +60,7 @@ class SearchResultList extends ConsumerWidget {
     if (searchResult.searchResults.isEmpty) {
       return Center(
         child: Text(
-          '検索結果がありません',
+          context.localizations.noResults,
           style: AppFontStyle.bodyMedium,
         ),
       );

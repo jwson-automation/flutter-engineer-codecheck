@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/search_result_provider.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/search_text_provider.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// カスタム検索バーウィジェット
@@ -13,7 +14,6 @@ class CustomSearchBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchText = ref.watch(searchTextProvider);
     final searchTextNotifier = ref.read(searchTextProvider.notifier);
-
     final searchResultNotifier = ref.read(searchResultProvider.notifier);
 
     return Padding(
@@ -24,7 +24,7 @@ class CustomSearchBar extends ConsumerWidget {
             TextPosition(offset: searchText.length),
           ),
         decoration: InputDecoration(
-          hintText: 'リポジトリを検索...',
+          hintText: context.localizations.searchBarHint,
           prefixIcon: const Icon(Icons.search),
           suffixIcon: searchText.isNotEmpty
               ? IconButton(

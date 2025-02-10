@@ -1,0 +1,62 @@
+{
+  "appTitle": "GitHub Repository Search",
+  "searchHint": "Search GitHub repositories",
+  
+  "noResults": "No results found",
+  "searchBarHint": "Search repositories...",
+  
+  "error": "An error occurred",
+  "retry": "Retry",
+  "networkError": "Please check your network connection",
+  "parsingError": "Error occurred while processing data",
+  "validationError": "Invalid input or too many requests",
+  "serviceUnavailable": "Service is temporarily unavailable",
+  "unknownError": "An unknown error occurred",
+  
+  "errorDialogTitle": "Error Occurred",
+  "errorDialogProblem": "Problem",
+  "errorDialogSolution": "Solution",
+  "errorDialogClose": "Close",
+  "apiLimitTitle": "API Request Limit",
+  "apiLimitSolution": "Please try again later",
+  "searchErrorTitle": "No Search Results",
+  "searchErrorSolution": "Please try with different search terms",
+  "networkErrorTitle": "Network Error",
+  "networkErrorSolution": "Please check your internet connection and try again",
+  "generalErrorSolution": "Please restart the app or try again later",
+  
+  "stars": "Stars",
+  "watchers": "Watchers",
+  "forks": "Forks",
+  "issues": "Issues",
+  "language": "Language",
+  "createdAt": "Created at",
+  "updatedAt": "Updated at",
+  "description": "Description",
+  "noDescription": "No description available",
+  
+  "emptySearchKeyword": "Please enter a search keyword",
+  "invalidSortOption": "Invalid sort option",
+  "invalidOrderOption": "Invalid order option",
+  "invalidPageItemCount": "Items per page must be between 1 and 100",
+  "invalidPageNumber": "Page number must be greater than 0",
+  "createdDate": "Created: {date}",
+  "@createdDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "updatedDate": "Updated: {date}",
+  "@updatedDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dateFormat": "MMMM dd, yyyy",
+  "invalidDate": "---- --, ----",
+  "goToRepository": "Go to Repository"
+} 

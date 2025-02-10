@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 
 /// エラーダイアログを表示するウィジェット
 class ErrorDialog extends StatelessWidget {
@@ -36,77 +37,73 @@ class ErrorDialog extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return AlertDialog(
-      backgroundColor: theme.dialogTheme.backgroundColor,
-      elevation: theme.dialogTheme.elevation,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.error_outline, color: theme.colorScheme.error),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  title,
-                  style: AppFontStyle.dialogTitle.copyWith(
-                    color: theme.colorScheme.error,
+  Widget build(BuildContext context) => AlertDialog(
+        backgroundColor: context.theme.dialogTheme.backgroundColor,
+        elevation: context.theme.dialogTheme.elevation,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.error_outline, color: context.colorScheme.error),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: AppFontStyle.dialogTitle.copyWith(
+                      color: context.colorScheme.error,
+                    ),
                   ),
                 ),
+              ],
+            ),
+            const Divider(color: Colors.white24),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                context.localizations.errorDialogProblem,
+                style: AppFontStyle.dialogMessage.copyWith(
+                  color: context.colorScheme.primary,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                message,
+                style: AppFontStyle.dialogMessage,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                context.localizations.errorDialogSolution,
+                style: AppFontStyle.dialogMessage.copyWith(
+                  color: context.colorScheme.primary,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                solution,
+                style: AppFontStyle.dialogMessage,
               ),
             ],
           ),
-          const Divider(color: Colors.white24),
-        ],
-      ),
-      content: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '問題',
-              style: AppFontStyle.dialogMessage.copyWith(
-                color: theme.colorScheme.primary,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              message,
-              style: AppFontStyle.dialogMessage,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              '解決方法',
-              style: AppFontStyle.dialogMessage.copyWith(
-                color: theme.colorScheme.primary,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              solution,
-              style: AppFontStyle.dialogMessage,
-            ),
-          ],
         ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(
-            '閉じる',
-            style: AppFontStyle.dialogMessage.copyWith(
-              color: theme.colorScheme.primary,
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(
+              context.localizations.errorDialogClose,
+              style: AppFontStyle.dialogMessage.copyWith(
+                color: context.colorScheme.primary,
+              ),
             ),
           ),
-        ),
-      ],
-    );
-  }
+        ],
+      );
 }

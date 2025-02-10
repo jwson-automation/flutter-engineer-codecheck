@@ -3,6 +3,8 @@ import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/theme_provider.dart';
 import 'package:flutter_engineer_codecheck/presenter/search_screen.dart';
 import 'package:flutter_engineer_codecheck/shared/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
@@ -12,7 +14,7 @@ void main() async {
   runApp(const ProviderScope(child: RepositorySearchApp()));
 }
 
-/// GitHub 리포지토리 검색 앱
+/// GITHUB リポジトリ検索アプリ
 class RepositorySearchApp extends ConsumerWidget {
   const RepositorySearchApp({super.key});
 
@@ -26,6 +28,17 @@ class RepositorySearchApp extends ConsumerWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       home: const SearchScreen(),
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ko'), // 韓国語
+        Locale('en'), // 英語
+        Locale('ja'), // 日本語
+      ],
     );
   }
 }

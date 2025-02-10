@@ -23,6 +23,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      # Flutterのローカライズファイルを生成します。
+      - name: Generate l10n
+        run: flutter gen-l10n
+
       # テストの実行とカバレッジの取得
       - name: Run tests
         run: flutter test --coverage

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_engineer_codecheck/shared/app_font_style.dart';
+import 'package:flutter_engineer_codecheck/shared/build_context_extension.dart';
 
 /// リポジトリの作成日と最終更新日を表示するウィジェット
 class DetailRepositoryDates extends StatelessWidget {
@@ -13,12 +14,12 @@ class DetailRepositoryDates extends StatelessWidget {
   final String updatedAt;
 
   /// 日付をフォーマットする
-  String _formatDate(String dateString) {
+  String _formatDate(BuildContext context, String dateString) {
     try {
       final date = DateTime.parse(dateString);
-      return DateFormat('yyyy年 MM月 dd日').format(date);
+      return DateFormat(context.localizations.dateFormat).format(date);
     } catch (_) {
-      return '----年 --月 --日';
+      return context.localizations.invalidDate;
     }
   }
 
@@ -30,7 +31,9 @@ class DetailRepositoryDates extends StatelessWidget {
               const Icon(Icons.calendar_today, size: 16),
               const SizedBox(width: 8),
               Text(
-                'Created: ${_formatDate(createdAt)}',
+                context.localizations.createdDate(
+                  _formatDate(context, createdAt),
+                ),
                 style: AppFontStyle.metaInfo,
               ),
             ],
@@ -41,7 +44,9 @@ class DetailRepositoryDates extends StatelessWidget {
               const Icon(Icons.update, size: 16),
               const SizedBox(width: 8),
               Text(
-                'Updated: ${_formatDate(updatedAt)}',
+                context.localizations.updatedDate(
+                  _formatDate(context, updatedAt),
+                ),
                 style: AppFontStyle.metaInfo,
               ),
             ],
