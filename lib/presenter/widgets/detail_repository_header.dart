@@ -53,27 +53,29 @@ class DetailRepositoryAvatar extends StatelessWidget {
     child: SizedBox(
       width: 32,
       height: 32,
-      child: Image.network(
-        avatarUrl,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => const Icon(
-          Icons.error,
-          size: 20,
-        ),
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) {
-            return child;
-          }
-          return Shimmer.fromColors(
-            baseColor: Theme.of(context).primaryColor,
-            highlightColor: Theme.of(context).primaryColorLight,
-            child: Container(
-              width: 32,
-              height: 32,
-              color: Colors.white,
+      child: StreamBuilder<ImageChunkEvent?>(
+        stream: Stream.value(null),
+        builder: (context, snapshot) => Stack(
+          children: [
+            Shimmer.fromColors(
+              baseColor: Theme.of(context).primaryColor,
+              highlightColor: Theme.of(context).primaryColorLight,
+              child: Container(
+                width: 32,
+                height: 32,
+                color: Colors.white,
+              ),
             ),
-          );
-        },
+            Image.network(
+              avatarUrl,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => const Icon(
+                Icons.error,
+                size: 20,
+              ),
+            ),
+          ],
+        ),
       ),
     ),
   );
