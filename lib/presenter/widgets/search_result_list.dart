@@ -45,10 +45,10 @@ class _SearchResultListState extends ConsumerState<SearchResultList> {
       setState(() {
         _isLoadingMore = true;
       });
-      
+
       // TODO: 追加データの読み込みロジックを実装する
       await Future.delayed(const Duration(seconds: 1)); // 一時的な遅延
-      
+
       setState(() {
         _isLoadingMore = false;
       });
@@ -86,8 +86,11 @@ class _SearchResultListState extends ConsumerState<SearchResultList> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.error_outline,
-                  size: 48, color: context.colorScheme.error,),
+              Icon(
+                Icons.error_outline,
+                size: 48,
+                color: context.colorScheme.error,
+              ),
               const SizedBox(height: 16),
               Text(
                 searchResult.error!,
