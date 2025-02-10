@@ -27,11 +27,8 @@ dev_dependencies:
   mocktail: ^1.0.4
 
 flutter:
-
   uses-material-design: true
-
   generate: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/

@@ -29,7 +29,11 @@ class SearchResultList extends ConsumerWidget {
     final searchResult = ref.watch(searchResultProvider);
 
     if (searchResult.isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return Image.asset(
+        'assets/yumemi_logo.gif',
+        width: 300,
+        height: 300,
+      );
     }
 
     if (searchResult.error != null) {
