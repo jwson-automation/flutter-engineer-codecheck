@@ -64,7 +64,8 @@ class SearchResultListItem extends StatelessWidget {
                   children: [
                     const Icon(Icons.star_border, size: 16),
                     const SizedBox(width: 4),
-                    Text('${searchResult.stargazersCount}', style: AppFontStyle.statsValue),
+                    Text('${searchResult.stargazersCount}',
+                        style: AppFontStyle.statsValue),
                   ],
                 ),
                 const SizedBox(width: 16),
@@ -74,7 +75,8 @@ class SearchResultListItem extends StatelessWidget {
                   children: [
                     const Icon(Icons.fork_right, size: 16),
                     const SizedBox(width: 4),
-                    Text('${searchResult.forksCount}', style: AppFontStyle.statsValue),
+                    Text('${searchResult.forksCount}',
+                        style: AppFontStyle.statsValue),
                   ],
                 ),
 
@@ -85,7 +87,8 @@ class SearchResultListItem extends StatelessWidget {
                     children: [
                       const Icon(Icons.code, size: 16),
                       const SizedBox(width: 4),
-                      Text(searchResult.language!, style: AppFontStyle.metaInfo),
+                      Text(searchResult.language!,
+                          style: AppFontStyle.metaInfo),
                     ],
                   ),
               ],

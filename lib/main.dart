@@ -19,7 +19,7 @@ class RepositorySearchApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
-    
+
     return MaterialApp(
       title: 'GitHub Repository Search',
       themeMode: themeMode,

@@ -52,4 +52,4 @@ class AppColorScheme {
     required this.primary,
     required this.error,
   });
-} 
+}
