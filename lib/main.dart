@@ -14,7 +14,7 @@ void main() async {
   runApp(const ProviderScope(child: RepositorySearchApp()));
 }
 
-/// GitHub 리포지토리 검색 앱
+/// GITHUB リポジトリ検索アプリ
 class RepositorySearchApp extends ConsumerWidget {
   const RepositorySearchApp({super.key});
 
@@ -35,9 +35,9 @@ class RepositorySearchApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('ko'), // 한국어
-        Locale('en'), // 영어
-        Locale('ja'), // 일본어
+        Locale('ko'), // 韓国語
+        Locale('en'), // 英語
+        Locale('ja'), // 日本語
       ],
     );
   }
