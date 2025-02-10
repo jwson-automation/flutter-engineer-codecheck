@@ -33,8 +33,16 @@ void main() {
         ),
       );
 
-      // ローディングインジケーターが表示されているか確認
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      // ローディング GIF イメージが表示されているか確認
+      final image = find.byType(Image);
+      expect(image, findsOneWidget);
+
+      // イメージウィジェットの属性を確認
+      final Image imageWidget = tester.widget<Image>(image);
+      expect((imageWidget.image as AssetImage).assetName, 'assets/yumemi_logo.gif');
+
+      // コンテナの破棄
+      addTearDown(container.dispose);
     });
 
     testWidgets('Shows error message when error occurs', (tester) async {
