@@ -58,5 +58,7 @@
   },
   "dateFormat": "yyyy年 MM月 dd日",
   "invalidDate": "----年 --月 --日",
-  "goToRepository": "リポジトリへ移動"
+  "goToRepository": "リポジトリへ移動",
+  "failedToLaunchUrl": "URLの起動に失敗しました",
+  "checkUrl": "このURLは無効なので、直接検索してください"
 } 
