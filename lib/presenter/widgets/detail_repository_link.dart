@@ -5,7 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// リポジトリリンクボタンを表示するウィジェット
 class DetailRepositoryLink extends StatelessWidget {
-
   const DetailRepositoryLink({
     super.key,
     required this.repositoryUrl,

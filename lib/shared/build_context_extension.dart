@@ -18,13 +18,14 @@ extension BuildContextExtension on BuildContext {
     required String title,
     required String message,
     required String solution,
-  }) async => showDialog(
-      context: this,
-      barrierColor: Colors.black54,
-      builder: (context) => ErrorDialog(
-        title: title,
-        message: message,
-        solution: solution,
-      ),
-    );
+  }) async =>
+      showDialog(
+        context: this,
+        barrierColor: Colors.black54,
+        builder: (context) => ErrorDialog(
+          title: title,
+          message: message,
+          solution: solution,
+        ),
+      );
 }
