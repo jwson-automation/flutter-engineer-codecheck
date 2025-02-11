@@ -26,6 +26,12 @@ jobs:
       - name: Generate l10n
         run: flutter gen-l10n
 
+      # GoogleサービスのJSONファイルをデコード
+      - name: Decode google-services.json
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $GOOGLE_SERVICES_JSON > android/app/google-services.json
+
       # .env ファイル生成
       - name: Create .env file
         run: |

@@ -1,0 +1,68 @@
+# Firebase　App Distribution に APK をアップロードする GitHub Actions の設定ファイル
+name: firebase-distribution
+
+on:
+  push:
+    # release ブランチに push された時のみワークフローを実行
+    branches: [ "release/**" ]
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.3'
+          channel: 'stable'
+          cache: true
+
+      # JDK 17をセットアップ
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      # プロジェクトの依存関係をインストール
+      - name: Get dependencies
+        run: flutter pub get
+
+      # GoogleサービスのJSONファイルをデコード
+      - name: Decode google-services.json
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $GOOGLE_SERVICES_JSON > android/app/google-services.json
+
+      # Firebase service account key を生成します。
+      - name: Generate Firebase service account key
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: echo $FIREBASE_SERVICE_ACCOUNT > firebase-service-account.json
+
+      # Flutterのローカライズファイルを生成します。
+      - name: Generate l10n
+        run: flutter gen-l10n
+
+      # Android APKのビルド
+      - name: Build Release APK
+        run: flutter build apk --release
+
+      # Upload to Firebase App Distribution
+      - name: Upload to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          serviceCredentialsFile: firebase-service-account.json
+          groups: testers
+          file: build/app/outputs/flutter-apk/app-release.apk
+          releaseNotes: |
+            Changes:
+            - ${{ github.event.head_commit.message }}
+          token: ${{ secrets.FIREBASE_TOKEN }}

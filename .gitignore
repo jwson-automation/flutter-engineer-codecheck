@@ -66,3 +66,7 @@ coverage/
 
 # env file
 .env
+
+# Firebase distribution
+google-services.json
+GoogleService-Info.plist
