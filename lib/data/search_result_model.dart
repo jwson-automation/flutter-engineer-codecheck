@@ -13,26 +13,27 @@ class SearchResultModel {
     required this.openIssuesCount,
     required this.createdAt,
     required this.updatedAt,
+    required this.htmlUrl,
     this.description,
   });
 
   /// JSONからGitHubRepositoryModelを生成するファクトリメソッド
   factory SearchResultModel.fromJson(Map<String, dynamic> json) =>
       SearchResultModel(
-        fullName: json['full_name'] ?? '',
-        ownerAvatarUrl: json.validateUrl(json['owner']?['avatar_url']),
-        description: json['description'],
-        language: json['language'],
-        stargazersCount:
-            json.parseCount(json['stargazers_count'], 'stargazers_count'),
-        watchersCount:
-            json.parseCount(json['watchers_count'], 'watchers_count'),
-        forksCount: json.parseCount(json['forks_count'], 'forks_count'),
-        openIssuesCount:
-            json.parseCount(json['open_issues_count'], 'open_issues_count'),
-        createdAt: json['created_at'],
-        updatedAt: json['updated_at'],
-      );
+          fullName: json['full_name'] ?? '',
+          ownerAvatarUrl: json.validateUrl(json['owner']?['avatar_url']),
+          description: json['description'],
+          language: json['language'],
+          stargazersCount:
+              json.parseCount(json['stargazers_count'], 'stargazers_count'),
+          watchersCount:
+              json.parseCount(json['watchers_count'], 'watchers_count'),
+          forksCount: json.parseCount(json['forks_count'], 'forks_count'),
+          openIssuesCount:
+              json.parseCount(json['open_issues_count'], 'open_issues_count'),
+          createdAt: json['created_at'],
+          updatedAt: json['updated_at'],
+          htmlUrl: json.validateUrl(json['html_url']));
 
   /// リポジトリ名
   final String fullName;
@@ -64,6 +65,9 @@ class SearchResultModel {
   /// 更新日時
   final String? updatedAt;
 
+  /// リポジトリのURL
+  final String? htmlUrl;
+
   /// JSONに変換するメソッド
   Map<String, dynamic> toJson() => {
         'full_name': fullName,
@@ -76,5 +80,6 @@ class SearchResultModel {
         'open_issues_count': openIssuesCount,
         'created_at': createdAt,
         'updated_at': updatedAt,
+        'html_url': htmlUrl,
       };
 }
