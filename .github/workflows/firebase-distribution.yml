@@ -28,9 +28,6 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Set Gradle permissions
-        run: chmod +x android/gradlew
-
       - name: Get dependencies
         run: flutter pub get
 
@@ -43,6 +40,10 @@ jobs:
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: echo $FIREBASE_SERVICE_ACCOUNT > firebase-service-account.json
+
+      # Flutterのローカライズファイルを生成します。
+      - name: Generate l10n
+        run: flutter gen-l10n
 
       - name: Build Release APK
         run: flutter build apk --release
@@ -57,3 +58,4 @@ jobs:
           releaseNotes: |
             Changes:
             - ${{ github.event.head_commit.message }}
+          token: ${{ secrets.FIREBASE_TOKEN }}
