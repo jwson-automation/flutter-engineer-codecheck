@@ -19,7 +19,6 @@ class SearchResultList extends ConsumerStatefulWidget {
 
 class _SearchResultListState extends ConsumerState<SearchResultList> {
   final ScrollController _scrollController = ScrollController();
-  bool _isLoadingMore = false;
 
   @override
   void initState() {
@@ -41,18 +40,8 @@ class _SearchResultListState extends ConsumerState<SearchResultList> {
   }
 
   Future<void> _loadMoreData() async {
-    if (!_isLoadingMore) {
-      setState(() {
-        _isLoadingMore = true;
-      });
-
-      // TODO: 追加データの読み込みロジックを実装する
-      await Future.delayed(const Duration(seconds: 1)); // 一時的な遅延
-
-      setState(() {
-        _isLoadingMore = false;
-      });
-    }
+    // 検索結果を取得
+    await ref.read(searchResultProvider.notifier).loadNextPage(context);
   }
 
   void _handleRepositoryTap(
@@ -114,12 +103,13 @@ class _SearchResultListState extends ConsumerState<SearchResultList> {
     return ListView.builder(
       controller: _scrollController,
       padding: const EdgeInsets.all(8),
-      itemCount: searchResult.searchResults.length + (_isLoadingMore ? 1 : 0),
+      itemCount: searchResult.searchResults.length +
+          (searchResult.isNextLoading ? 1 : 0),
       itemBuilder: (context, index) {
         if (index == searchResult.searchResults.length) {
           return const Center(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8),
               child: CircularProgressIndicator(),
             ),
           );

@@ -17,7 +17,10 @@ class SearchState {
   SearchState({
     this.searchResults = const [],
     this.isLoading = false,
+    this.isNextLoading = false,
     this.error,
+    this.currentPage = 1,
+    this.lastSearchText = '',
   });
 
   /// [searchResults] 検索結果リスト
@@ -26,20 +29,35 @@ class SearchState {
   /// [isLoading] 検索中のローディング状態
   final bool isLoading;
 
+  /// [isNextLoading] 次のページをロード中のローディング状態
+  final bool isNextLoading;
+
   /// [error] エラー発生時のエラーメッセージ
   final String? error;
+
+  /// [currentPage] 現在のページ番号
+  final int currentPage;
+
+  /// [lastSearchText] 前回の検索クエリ
+  final String lastSearchText;
 
   /// 現在の状態をコピーして新しい状態を生成するメソッド
   /// 変更しないフィールドにnullを渡すと既存の値が維持される
   SearchState copyWith({
     List<SearchResultModel>? searchResults,
     bool? isLoading,
+    bool? isNextLoading,
     String? error,
+    int? currentPage,
+    String? lastSearchText,
   }) =>
       SearchState(
         searchResults: searchResults ?? this.searchResults,
         isLoading: isLoading ?? this.isLoading,
+        isNextLoading: isNextLoading ?? this.isNextLoading,
         error: error,
+        currentPage: currentPage ?? this.currentPage,
+        lastSearchText: lastSearchText ?? this.lastSearchText,
       );
 }
 
@@ -58,12 +76,15 @@ class SearchNotifier extends StateNotifier<SearchState> {
       state = state.copyWith(
         isLoading: true,
         error: null,
+        currentPage: 1,
+        lastSearchText: searchText,
       );
 
       final results = await _repository.searchRepositories(
         searchText: searchText,
         sort: 'stars',
         order: 'desc',
+        page: 1,
       );
 
       // 検索結果を状態に反映し、ローディング状態を解除
@@ -76,6 +97,38 @@ class SearchNotifier extends StateNotifier<SearchState> {
       state = state.copyWith(
         error: errorMessage,
         isLoading: false,
+      );
+
+      if (!context.mounted) return;
+      await _showErrorDialog(context, e, errorMessage);
+    }
+  }
+
+  /// 次のページをロードするメソッド
+  Future<void> loadNextPage(BuildContext context) async {
+    if (state.isLoading || state.lastSearchText.isEmpty) return;
+
+    try {
+      state = state.copyWith(isNextLoading: true);
+
+      final nextPage = state.currentPage + 1;
+      final results = await _repository.searchRepositories(
+        searchText: state.lastSearchText,
+        sort: 'stars',
+        order: 'desc',
+        page: nextPage,
+      );
+
+      state = state.copyWith(
+        searchResults: [...state.searchResults, ...results],
+        currentPage: nextPage,
+        isNextLoading: false,
+      );
+    } catch (e) {
+      final errorMessage = _formatErrorMessage(e);
+      state = state.copyWith(
+        error: errorMessage,
+        isNextLoading: false,
       );
 
       if (!context.mounted) return;
@@ -96,6 +149,7 @@ class SearchNotifier extends StateNotifier<SearchState> {
     }
     return e.toString();
   }
+
 
   /// エラーダイアログを表示するメソッド
   Future<void> _showErrorDialog(
