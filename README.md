@@ -73,6 +73,7 @@ GitHub APIを活用してリポジトリを検索し、詳細情報を確認で�
 ## アプリのフロー
 <details>
   <summary> 表示する </summary>
+ 
   ```mermaid
 flowchart TD
     A[App Start] --> B[Search Screen]
@@ -94,6 +95,7 @@ flowchart TD
     G --> B
     Q --> B
 ```
+
 </details>
 
 
