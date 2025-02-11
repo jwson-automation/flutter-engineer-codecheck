@@ -8,6 +8,7 @@ environment:
   sdk: ^3.6.1
 
 dependencies:
+  device_preview: ^1.2.0
   flutter:
     sdk: flutter
   flutter_config: ^2.0.2
