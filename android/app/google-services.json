@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "912497166004",
+    "project_id": "yumemi-assignment",
+    "storage_bucket": "yumemi-assignment.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912497166004:android:f3a8649eca85c874d2b9e1",
+        "android_client_info": {
+          "package_name": "com.example.flutter_engineer_codecheck"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8HjE1Q0Q4KF7MFmXwMHMDA0F0B9D-wFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
