@@ -17,6 +17,7 @@ mixin GitHubRepositoryFixtures {
     'open_issues_count': 50,
     'created_at': '2023-03-15T00:00:00Z',
     'updated_at': '2024-01-28T00:00:00Z',
+    'html_url': '',
   };
 
   /// オプションフィールドのないテストJSONデータ
