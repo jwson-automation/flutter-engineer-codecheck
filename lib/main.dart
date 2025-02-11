@@ -16,7 +16,7 @@ void main() async {
   runApp(
     /// DevicePreview で画面プレビューを行う ( Screen Sizeの変更と確認のため )
     DevicePreview(
-      enabled: !kReleaseMode,// リリースモードでは無効
+      enabled: !kReleaseMode, // リリースモードでは無効
       builder: (context) => const ProviderScope(child: RepositorySearchApp()),
     ),
   );
