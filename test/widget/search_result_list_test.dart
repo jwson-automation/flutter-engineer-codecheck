@@ -113,6 +113,7 @@ void main() {
           openIssuesCount: 50,
           createdAt: '2023-03-15T00:00:00Z',
           updatedAt: '2024-01-28T00:00:00Z',
+          html_url: '',
         ),
         SearchResultModel(
           fullName: 'dart-lang/dart-sdk',
@@ -126,6 +127,7 @@ void main() {
           openIssuesCount: 40,
           createdAt: '2023-01-01T00:00:00Z',
           updatedAt: '2024-02-01T00:00:00Z',
+          html_url: '',
         ),
       ];
 

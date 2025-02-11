@@ -57,7 +57,10 @@ class DetailScreen extends StatelessWidget {
                             updatedAt: searchResult.updatedAt!,
                           ),
                         const SizedBox(height: 24),
-                        const DetailRepositoryLink(),
+                        if (searchResult.html_url != null)
+                          DetailRepositoryLink(
+                            repositoryUrl: searchResult.html_url!,
+                          ),
                       ],
                     ),
                   ),
