@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_engineer_codecheck/presenter/providers/theme_provider.dart';
@@ -11,7 +13,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Required by FlutterConfig
   await FlutterConfig.loadEnvVariables();
 
-  runApp(const ProviderScope(child: RepositorySearchApp()));
+  runApp(
+    /// DevicePreview で画面プレビューを行う ( Screen Sizeの変更と確認のため )
+    DevicePreview(
+      enabled: !kReleaseMode, // リリースモードでは無効
+      builder: (context) => const ProviderScope(child: RepositorySearchApp()),
+    ),
+  );
 }
 
 /// GITHUB リポジトリ検索アプリ

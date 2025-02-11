@@ -74,14 +74,21 @@ class DetailStatCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 28),
-              Text(
-                value,
-                style: AppFontStyle.statsValue,
+              Flexible(flex: 3, child: Icon(icon, size: 28)),
+              const SizedBox(height: 8),
+              Flexible(
+                flex: 4,
+                child: Text(
+                  value,
+                  style: AppFontStyle.statsValue,
+                ),
               ),
-              Text(
-                label,
-                style: AppFontStyle.statsValue,
+              Flexible(
+                flex: 4,
+                child: Text(
+                  label,
+                  style: AppFontStyle.statsValue,
+                ),
               ),
             ],
           ),
