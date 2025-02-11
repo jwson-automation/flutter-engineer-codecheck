@@ -13,7 +13,7 @@ class SearchResultModel {
     required this.openIssuesCount,
     required this.createdAt,
     required this.updatedAt,
-    required this.html_url,
+    required this.htmlUrl,
     this.description,
   });
 
@@ -33,7 +33,7 @@ class SearchResultModel {
             json.parseCount(json['open_issues_count'], 'open_issues_count'),
         createdAt: json['created_at'],
         updatedAt: json['updated_at'],
-        html_url: json['html_url'],
+        htmlUrl: json['html_url'],
       );
 
   /// リポジトリ名
@@ -67,7 +67,7 @@ class SearchResultModel {
   final String? updatedAt;
 
   /// リポジトリのURL
-  final String? html_url;
+  final String? htmlUrl;
 
   /// JSONに変換するメソッド
   Map<String, dynamic> toJson() => {
@@ -81,6 +81,6 @@ class SearchResultModel {
         'open_issues_count': openIssuesCount,
         'created_at': createdAt,
         'updated_at': updatedAt,
-        'html_url': html_url,
+        'html_url': htmlUrl,
       };
 }
