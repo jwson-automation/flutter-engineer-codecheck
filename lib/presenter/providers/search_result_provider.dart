@@ -63,9 +63,12 @@ class SearchState {
 
 /// 検索に関連するビジネスロジックを処理するStateNotifier
 class SearchNotifier extends StateNotifier<SearchState> {
-  SearchNotifier() : super(SearchState());
+  /// テスト用にリポジトリを注入できるようにコンストラクタを追加
+  SearchNotifier({GitHubRepository? repository}) : super(SearchState()) {
+    _repository = repository ?? GitHubRepository();
+  }
 
-  final GitHubRepository _repository = GitHubRepository();
+  late final GitHubRepository _repository;
 
   /// 検索を実行するメソッド
   /// [searchText] 検索クエリ
