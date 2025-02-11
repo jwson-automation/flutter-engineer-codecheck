@@ -35,6 +35,7 @@ class RepositorySearchApp extends ConsumerWidget {
       themeMode: themeMode,
       theme: lightTheme,
       darkTheme: darkTheme,
+      debugShowCheckedModeBanner: false,
       home: const SearchScreen(),
       localizationsDelegates: const [
         AppLocalizations.delegate,
