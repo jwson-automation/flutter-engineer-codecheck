@@ -153,7 +153,6 @@ class SearchNotifier extends StateNotifier<SearchState> {
     return e.toString();
   }
 
-
   /// エラーダイアログを表示するメソッド
   Future<void> _showErrorDialog(
       BuildContext context, Object e, String errorMessage) async {
