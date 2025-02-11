@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_engineer_codecheck/presenter/widgets/error_dialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// BuildContextの拡張機能
@@ -11,4 +12,19 @@ extension BuildContextExtension on BuildContext {
 
   /// テーマを取得する拡張機能
   ThemeData get theme => Theme.of(this);
+
+  /// エラーダイアログを表示する拡張機能
+  Future<void> showErrorDialog({
+    required String title,
+    required String message,
+    required String solution,
+  }) async => showDialog(
+      context: this,
+      barrierColor: Colors.black54,
+      builder: (context) => ErrorDialog(
+        title: title,
+        message: message,
+        solution: solution,
+      ),
+    );
 }

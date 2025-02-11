@@ -33,7 +33,7 @@ class SearchResultModel {
             json.parseCount(json['open_issues_count'], 'open_issues_count'),
         createdAt: json['created_at'],
         updatedAt: json['updated_at'],
-        htmlUrl: json['html_url'],
+        htmlUrl: json.validateUrl(json['html_url'])
       );
 
   /// リポジトリ名

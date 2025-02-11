@@ -1,10 +1,8 @@
 {
   "appTitle": "GitHub Repository Search",
   "searchHint": "Search GitHub repositories",
-  
   "noResults": "No results found",
   "searchBarHint": "Search repositories...",
-  
   "error": "An error occurred",
   "retry": "Retry",
   "networkError": "Please check your network connection",
@@ -12,7 +10,6 @@
   "validationError": "Invalid input or too many requests",
   "serviceUnavailable": "Service is temporarily unavailable",
   "unknownError": "An unknown error occurred",
-  
   "errorDialogTitle": "Error Occurred",
   "errorDialogProblem": "Problem",
   "errorDialogSolution": "Solution",
@@ -24,7 +21,6 @@
   "networkErrorTitle": "Network Error",
   "networkErrorSolution": "Please check your internet connection and try again",
   "generalErrorSolution": "Please restart the app or try again later",
-  
   "stars": "Stars",
   "watchers": "Watchers",
   "forks": "Forks",
@@ -34,7 +30,6 @@
   "updatedAt": "Updated at",
   "description": "Description",
   "noDescription": "No description available",
-  
   "emptySearchKeyword": "Please enter a search keyword",
   "invalidSortOption": "Invalid sort option",
   "invalidOrderOption": "Invalid order option",
@@ -58,5 +53,7 @@
   },
   "dateFormat": "MMMM dd, yyyy",
   "invalidDate": "---- --, ----",
-  "goToRepository": "Go to Repository"
-} 
+  "goToRepository": "Go to Repository",
+  "failedToLaunchUrl": "Failed to launch URL",
+  "checkUrl": "This URL may be invalid, please search in your browser"
+}

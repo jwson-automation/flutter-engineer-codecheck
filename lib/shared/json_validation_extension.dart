@@ -11,7 +11,9 @@ extension JsonValidationExtension on Map<String, dynamic> {
 
   /// URLのバリデーションを行う
   String validateUrl(String? url) {
-    if (url == null || url.isEmpty) return '';
+    if (url == null || url.isEmpty) {
+      return '';
+    }
     if (!url.startsWith('http')) {
       throw FormatException('Invalid URL format: $url');
     }

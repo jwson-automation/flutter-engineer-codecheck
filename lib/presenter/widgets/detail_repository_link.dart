@@ -5,18 +5,23 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// リポジトリリンクボタンを表示するウィジェット
 class DetailRepositoryLink extends StatelessWidget {
-  final String repositoryUrl;
 
   const DetailRepositoryLink({
     super.key,
     required this.repositoryUrl,
   });
+  final String repositoryUrl;
 
-  Future<void> _launchUrl() async {
+  Future<void> _launchUrl(BuildContext context) async {
     final uri = Uri.parse(repositoryUrl);
-    print(uri);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
+    } else {
+      await context.showErrorDialog(
+        title: context.localizations.error,
+        message: context.localizations.failedToLaunchUrl,
+        solution: context.localizations.checkUrl,
+      );
     }
   }
 
@@ -29,7 +34,7 @@ class DetailRepositoryLink extends StatelessWidget {
             context.localizations.goToRepository,
             style: AppFontStyle.button,
           ),
-          onPressed: _launchUrl,
+          onPressed: () => _launchUrl(context),
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
